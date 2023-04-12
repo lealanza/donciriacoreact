@@ -1,13 +1,11 @@
-import './App.css';
-import products from './data/data'
 
-function App() {
+import React from "react";
+import Layout from "./components/layout/Layout";
+const App = () => {
   return (
-    <div className="App">
+   <Layout/>
     
-    
-    </div>
   );
-}
+};
 
 export default App;
