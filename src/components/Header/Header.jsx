@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './header.css'
 import { Container, Row } from 'reactstrap'
 import logo from '../../LOGOS/logo.png'
@@ -28,9 +28,9 @@ const Header = () => {
             <Container>
                 <Row>
                     <div className="nav__wrapper">
-                        <div className="logo">
+                        <Link className="logo" to="/home">
                             <img src={logo} alt="logo" />
-                        </div>
+                        </Link>
                         <div className="navigation">
                             <ul className="menu">
                                 {

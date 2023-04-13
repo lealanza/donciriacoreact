@@ -1,42 +1,59 @@
 .hero__section{
     background: var(--hero-bg);
-    
-    
 }
 .hero__wrapper{
-    display: flex;
+    width: 1300px;
+    margin:10px auto ;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    padding: 20px 50px;
 }
 .hero__content{
-    margin: auto;
-    max-width: 1400px;
-    height: 600px;
-    background-image: url("../images/hero.jpg");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    padding-top: 20px;
+    margin: 0 auto;
+    max-width: 1300px;
 }
 
-.hero__section h2{
+.hero__section h3{
     color: var(--color-primary);
-    font-size: 2.5rem;
+    font-size: 2.05rem;
     font-weight: 600;
     margin: 20px 0px;
-    max-width: 500px;
+    max-width:600px;
+    /**filter: drop-shadow( 5px 5px 5px var(--color-primary) );**/
+    text-shadow:3px 3px 7px var(--color-primary);
 }
 
 .hero__section p{
     margin: 10px;
-    color: #fff;
+    color: black;
+    font-weight: 600;
+    max-width:500px;
+}
+.hero__section p:nth-child(1){
+    font-weight: 600;
 }
 
 .buy__btn{
     position: relative;
-    top: 20px;
-    left: 50px;
+    top: 10px;
     padding: 10px 20px;
-    background: transparent;
+    font-weight: 400;
+    font-size: larger;
+    background-color: transparent;
     border-radius: 10px;
-    color: #fff;
+    background-color:var(--color-primary);
     border: 2px solid var(--color-primary);
 }
+a{
+    color: #fff;
+    font-weight: 300;
+}
+.buy__btn::after{
+    color: var(--color-primary);
+}
 
+.heroImg{
+    max-width: 600px;
+    filter: drop-shadow( 5px 5px 5px #000000 );
+}
