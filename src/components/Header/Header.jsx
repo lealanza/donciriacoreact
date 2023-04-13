@@ -1,38 +1,74 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './header.css'
-import { Container } from '@chakra-ui/react'
-import { Row } from 'reactstrap'
+import { Container, Row } from 'reactstrap'
 import logo from '../../LOGOS/logo.png'
+import user from '../../LOGOS/user.png'
+import { HiOutlineMenu } from 'react-icons/hi'
+import { motion } from 'framer-motion'
+import { FaHeart, FaOpencart } from 'react-icons/fa'
+
+const nav__links = [
+    {
+        path: 'home',
+        display: 'Home'
+    }, {
+        path: 'shop',
+        display: 'Shop'
+    }, {
+        path: 'cart',
+        display: 'Cart'
+    },
+
+]
 
 const Header = () => {
-  return (
-    <header className="header">
-        <Container>
-            <Row>
-                <div className="nav__wrapper">
-                    <div className="logo">
-                        <img src={logo} alt="logo" />
+    return (
+        <header className="header">
+            <Container>
+                <Row>
+                    <div className="nav__wrapper">
+                        <div className="logo">
+                            <img src={logo} alt="logo" />
+                        </div>
+                        <div className="navigation">
+                            <ul className="menu">
+                                {
+                                    nav__links.map((item, index) =>
+                                        <li className="nav__item" key={index}>
+                                            <NavLink to={item.path}
+                                                className={(navClass) =>
+                                                    navClass.isActive ? "nav__active" : ""}
+                                            >
+                                                {item.display}</NavLink>
+                                        </li>)
+                                }
+                            </ul>
+                        </div>
+
+                        <div className="nav__icons">
+                            <span className="fav__icon">
+                                <FaHeart className="fav__icon"/>
+                                <span className="badge">1</span>
+                            </span>
+                            <span className="cart__icon">
+                                <FaOpencart className="cart__icon"/>
+                                <span className="badge">1</span>
+                            </span>
+
+                            <span>
+                                <motion.img whileTap={{ scale: 1.3 }} src={user} alt="user" />
+                            </span>
+                        </div>
+                        <div className="mobile__menu">
+                            <HiOutlineMenu />
+                        </div>
+
                     </div>
-                    <div className="navigation">
-                        <ul className="menu">
-                            <li className="nav__item">
-                                <NavLink to='home'>Home</NavLink>
-                            </li>
-                            <li className="nav__item">
-                                <NavLink to=''>Shop</NavLink>
-                            </li>
-                            <li className="nav__item">
-                                <NavLink to=''>Cart</NavLink>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </Row>
-        </Container>
-    </header>
-  )
+                </Row>
+            </Container>
+        </header>
+    )
 }
 
 export default Header
