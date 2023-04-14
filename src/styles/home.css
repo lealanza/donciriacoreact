@@ -1,15 +1,8 @@
 .hero__section{
     background: var(--hero-bg);
 }
-.hero__wrapper{
-    width: 1300px;
-    margin:10px auto ;
-    display: grid;
-    grid-template-columns: 2fr 2fr;
-    padding: 20px 50px;
-}
+
 .hero__content{
-    padding-top: 20px;
     margin: 0 auto;
     max-width: 1300px;
 }
@@ -45,7 +38,8 @@
     background-color:var(--color-primary);
     border: 2px solid var(--color-primary);
 }
-a{
+.buy__btn a{
+    text-decoration: none;
     color: #fff;
     font-weight: 300;
 }
@@ -54,6 +48,5 @@ a{
 }
 
 .heroImg{
-    max-width: 600px;
     filter: drop-shadow( 5px 5px 5px #000000 );
 }

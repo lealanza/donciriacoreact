@@ -1,16 +1,13 @@
 .header{
-    max-width: 1300px;
-    height: auto;
+    width: 100%;
+    height: 7rem;
     line-height: 70px;
-   
 }
 .nav__wrapper{
     display: flex;
-    margin: 0 auto;
     justify-content: space-between;
-    align-items: center;
-    
-    
+    align-items: center;    
+    margin-top: 10px;
 }
 .logo{
     display: flex;
@@ -20,7 +17,6 @@
 }
 .logo img{
     width: 7rem;
-    height: 7rem;
     filter: drop-shadow( 5px 5px 5px #000000 );
 }
 
@@ -50,23 +46,23 @@
 }
 
 .badge{
-    line-height: 13px;
-    width: 13px;
-    height: 13px;
-    text-align: center;
-    position: absolute;
-    top: 20%;
-    content: '';
-    right: -35%;
+   position: absolute;
+   top: 28%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    text-align: center !important;
     border: 1px solid var(--color-primary);
-    color: var(--color-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: .7rem;
-    font-weight: 600;
-    z-index: 10;
+   content: '';
+   background: #fff;
+   color: var(--color-primary)!important;
+   display: flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+   border-radius: 50% !important;
+   font-size: 0.6rem !important;
+   font-weight: 600 !important;
+   z-index: 10 !important;
 }
 .nav__icons {
     font-size: 1.3rem;

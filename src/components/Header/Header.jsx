@@ -6,7 +6,6 @@ import logo from '../../LOGOS/logo.png'
 import user from '../../LOGOS/user.png'
 import { HiOutlineMenu } from 'react-icons/hi'
 import { motion } from 'framer-motion'
-import { FaHeart, FaOpencart } from 'react-icons/fa'
 
 const nav__links = [
     {
@@ -48,11 +47,11 @@ const Header = () => {
 
                         <div className="nav__icons">
                             <span className="fav__icon">
-                                <FaHeart className="fav__icon"/>
+                                <i class="ri-heart-line"></i>
                                 <span className="badge">1</span>
                             </span>
                             <span className="cart__icon">
-                                <FaOpencart className="cart__icon"/>
+                                <i class="ri-shopping-cart-line"></i>
                                 <span className="badge">1</span>
                             </span>
 
