@@ -50,3 +50,24 @@
 .heroImg{
     filter: drop-shadow( 5px 5px 5px #000000 );
 }
+
+.timer__count{
+    background: var(--color-primary);
+    height: 300px;
+}
+
+.timer__count img{
+    width: 70% !important;
+    height: 70% !important;
+    object-fit: contain;
+}
+
+.store__btn{
+    background: #FFF;
+    
+}
+
+.store__btn a{
+    color:  var(--color-primary);
+    font-weight: 600;
+}

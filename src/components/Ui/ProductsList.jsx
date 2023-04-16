@@ -1,13 +1,14 @@
 import React from 'react'
 import ProdcutCard from './ProdcutCard'
 
-const ProductsList = () => {
+const ProductsList = ({data}) => {
     return (
         <>
-            <ProdcutCard />
-            <ProdcutCard />
-            <ProdcutCard />
-            <ProdcutCard />
+       
+        {data.map( item=>(
+            <ProdcutCard item={item}/>
+        ))}
+       
         </>
     )
 }

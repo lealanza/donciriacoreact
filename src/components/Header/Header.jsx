@@ -10,13 +10,13 @@ import { motion } from 'framer-motion'
 const nav__links = [
     {
         path: 'home',
-        display: 'Home'
+        display: 'Inico'
     }, {
         path: 'shop',
-        display: 'Shop'
+        display: 'Tienda'
     }, {
         path: 'cart',
-        display: 'Cart'
+        display: 'Carrito'
     },
 
 ]
