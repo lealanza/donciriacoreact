@@ -9,6 +9,8 @@
     gap: 3rem;
 }
 .footer-text{
+    margin-right: 20px;
+    font-size: 0.9rem;
     line-height: 30px;
     color: #ffffff96;
 }
