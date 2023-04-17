@@ -14,18 +14,14 @@ import Clock from '../components/Ui/Clock'
 
 
 const Home = () => {
-
   const [trendingProducts, setTrendingProducts] = useState([])
   const [bestSalesProducts, setBestSalesProducts] = useState([])
   const [bicicletasRuta, setBicicletasRuta] = useState([])
   const [bicicletasMtb, setBicicletasMtb] = useState([])
-
-
-
   const year = new Date().getFullYear()
   useEffect(() => {
     const filterTrendingProducts = products.filter(item => item.category === 'gravel');
-    const filterBestSalesProducts = products.filter(item => item.category === 'mtb');
+    const filterBestSalesProducts = products.filter(item => item.avgRating > '4.5');
     const filterBicicletasMtb = products.filter(item => item.category === 'mtb');
     const filterBicicletasRuta = products.filter(item => item.category === 'ruta');
 
@@ -85,7 +81,7 @@ const Home = () => {
             <Col lg='6' md='6'>
               <div className="clock__top-content">
                 <h4 className='text-white fs-6 mb-2'>Ofertas de tiempo limitado</h4>
-                <h3 className='text-white fs-5 mb-3' >Gravel</h3>
+                <h3 className='text-white fs-5 mb-3' ></h3>
               </div>
               <Clock />
 
@@ -106,7 +102,7 @@ const Home = () => {
       <section className="new__arrivals">
         <Container>
           <Row>
-            <Col lg='12' className='text-center'>
+            <Col lg='12' className='text-center mb-5'>
             <h2 className='section__title'>Nuevos ingresos!!!</h2>
             </Col>
             <ProductsList data={bicicletasMtb} /> 

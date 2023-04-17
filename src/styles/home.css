@@ -57,6 +57,7 @@
 }
 
 .timer__count img{
+    filter: drop-shadow( 5px 5px 2px black) ;
     width: 70% !important;
     height: 70% !important;
     object-fit: contain;

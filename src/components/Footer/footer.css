@@ -1,0 +1,38 @@
+.footer{
+    padding-top: 60px;
+    background: var(--color-primary);
+}
+
+
+.footer-logo{
+    display: flex;
+    gap: 3rem;
+}
+.footer-text{
+    line-height: 30px;
+    color: #ffffff96;
+}
+.footer__quicks-links{
+    padding-top: 20px;
+}
+.footer__quicks-links ul li{
+    background: transparent;
+    
+}
+.footer__quicks-links i{
+    color: white;
+    font-size: 1.2rem;
+}
+.footer__quicks-links a{
+    text-decoration: none;
+    color: #ffffff96;
+}
+.quicks__link-title{
+    margin-bottom: 20px;
+}
+
+.footer__copy{
+    margin-top: 50px;
+    font-size: .9rem;
+    text-align: center;
+}

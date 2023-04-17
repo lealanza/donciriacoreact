@@ -833,7 +833,7 @@ import productImg51 from "../images/productImg51.jpg";
             text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
           },
         ],
-        avgRating: 4.5,
+        avgRating: 4.8,
       },
       {
         id: 28,
@@ -886,7 +886,7 @@ import productImg51 from "../images/productImg51.jpg";
             text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
           },
         ],
-        avgRating: 4.5,
+        avgRating: 4.8,
       },
       {
         id: 30,
@@ -994,7 +994,7 @@ import productImg51 from "../images/productImg51.jpg";
             text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
           },
         ],
-        avgRating: 4.5,
+        avgRating: 4.9,
       },
       {
         id: 34,
@@ -1048,7 +1048,7 @@ import productImg51 from "../images/productImg51.jpg";
             text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
           },
         ],
-        avgRating: 4.5,
+        avgRating: 4.7,
       },
       {
         id: 36,
@@ -1075,7 +1075,7 @@ import productImg51 from "../images/productImg51.jpg";
             text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
           },
         ],
-        avgRating: 4.5,
+        avgRating: 4.85,
       },
       {
         id: 37,
