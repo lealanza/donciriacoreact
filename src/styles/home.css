@@ -53,13 +53,11 @@
 
 .timer__count{
     background: var(--color-primary);
-    height: 300px;
 }
 
 .timer__count img{
     filter: drop-shadow( 5px 5px 2px black) ;
     width: 70% !important;
-    height: 70% !important;
     object-fit: contain;
 }
 
@@ -71,4 +69,62 @@
 .store__btn a{
     color:  var(--color-primary);
     font-weight: 600;
+}
+
+
+@media only screen and (max-width:992px){
+    .hero__content h2{
+        font-size: 2rem;
+    }
+    .section__title{
+        font-size: 1.5rem;
+    }
+    .timer__count{
+        text-align: center;
+    }
+    .count__down-col{
+        text-align: center;
+    }
+    .counter__img{
+        display: none;
+     }
+
+}
+
+@media only screen and (max-width:768px){
+    .hero__content h2{
+        font-size: 1.5rem;
+    }
+    .hero__content p{
+        font-size: 0.8rem;
+    }
+
+    .buy__btn{
+        font-size: 0.8rem;
+    }
+    .heroImg{
+        margin-top:20px ;
+        border-radius: 5px;
+    
+    }
+    .section__title{
+        font-size: 1.4rem;
+    }
+    .counter__img{
+        display: none;
+     }
+    .count__down-col{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width:576px){
+    .hero__content{
+        padding-top: 0;
+        margin-bottom: 40px;
+    }
+    .counter__img{
+       display: none;
+    }
+    
 }

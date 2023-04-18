@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col lg='4'>
+        <Col lg='4' md='6'>
             <div className='footer-logo'>
               <Link className="logo" to="/home">
                 <img src={logo} alt="logo" />
@@ -23,9 +23,9 @@ const Footer = () => {
             </div>
 
           </Col>
-          <Col lg='3'>
+          <Col lg='3' md='3'>
             <div className="footer__quicks-links">
-              <h4 className="quicks__link-title">Top Categorias</h4>
+              <h4 className="quicks__link-title text-black">Top Categorias</h4>
               <ListGroup >
                   <ListGroupItem className='ps-0 border-0'>
                   <Link to='#'>Mountain Bike</Link>
@@ -48,9 +48,9 @@ const Footer = () => {
                 </ListGroup>
             </div>
           </Col>
-          <Col lg='2'>
+          <Col lg='2' md='3'>
           <div className="footer__quicks-links">
-              <h4 className="quicks__link-title">Links Utiles</h4>
+              <h4 className="quicks__link-title text-black">Links Utiles</h4>
               <ListGroup >
                   <ListGroupItem className='ps-0 border-0'>
                   <Link to='/shop'>Tienda</Link>
@@ -68,9 +68,9 @@ const Footer = () => {
                 </ListGroup>
             </div>
           </Col>
-          <Col lg='3'>
+          <Col lg='3' md='3'>
           <div className="footer__quicks-links">
-              <h4 className="quicks__link-title">Contacto</h4>
+              <h4 className="quicks__link-title text-black">Contacto</h4>
               <ListGroup >
                   <ListGroupItem className='ps-0 border-0 d-flex align-item-center gap-2'>
                   <span><i class="ri-map-pin-3-line"></i></span>

@@ -31,3 +31,30 @@
     color: black;
     font-size: 0.9rem;
 }
+
+@media only screen and (max-width: 992px){
+    .services__item span i{
+        font-size: 1.8rem;
+        padding: 5px;
+    }
+
+    .services__item h3{
+        font-size: 1rem;
+    }
+    .services__item{
+        margin-bottom: .8rem;
+        padding: 10px;
+    }
+
+}
+@media only screen and (max-width: 768px){
+    .services__item span i{
+        font-size: 1.4rem;
+        padding: 5px;
+    }
+}
+@media only screen and (max-width: 576px){
+    .services__item{
+        margin-bottom: 20px;
+    }
+}
