@@ -6,6 +6,7 @@ import logo from '../../LOGOS/logo.png'
 import user from '../../LOGOS/user.png'
 import { HiOutlineMenu } from 'react-icons/hi'
 import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 const nav__links = [
     {
@@ -26,6 +27,7 @@ const Header = () => {
    
     const headerRef = useRef(null)
     const menuRef = useRef(null)
+    const totalQuantity = useSelector(state=>state.cart.totalQuantity)
     const stickyHeaderFunc = () => {
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -72,7 +74,7 @@ const Header = () => {
                             </span>
                             <span className="cart__icon">
                                 <i class="ri-shopping-cart-line"></i>
-                                <span className="badge">1</span>
+                                <span className="badge">{totalQuantity}</span>
                             </span>
 
                             <span>
