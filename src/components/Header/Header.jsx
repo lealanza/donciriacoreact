@@ -5,7 +5,7 @@ import { Container, Row } from 'reactstrap'
 import logo from '../../LOGOS/logo.png'
 import user from '../../LOGOS/user.png'
 import { HiOutlineMenu } from 'react-icons/hi'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const nav__links = [
     {

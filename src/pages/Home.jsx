@@ -48,7 +48,7 @@ const Home = () => {
             </Col>
             <Col lg='6' md='6'>
               <div className='hero__img'>
-                <img src={heroImagen} className='heroImg' />
+                <img src={heroImagen} className='heroImg' alt='heroimagen'/>
               </div>
             </Col>
           </Row>
@@ -81,7 +81,7 @@ const Home = () => {
             <Col lg='6' md='12' className='count__down-col'>
               <div className="clock__top-content">
                 <h4 className='text-white fs-6 mb-2'>Ofertas de tiempo limitado</h4>
-                <h3 className='text-white fs-5 mb-3' ></h3>
+                <h3 className='text-white fs-5 mb-3'>No te duermas!</h3>
               </div>
               <Clock />
 
