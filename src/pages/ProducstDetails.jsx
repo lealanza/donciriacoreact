@@ -25,7 +25,7 @@ const ProducstDetails = () => {
               <div className="product__details">
                 <h2>{productName}</h2>
                 <div className="product__rating d-flex align-items-center mb-4">
-                  <span><i class="ri-star-fill"></i>S</span>
+                  <span><i class="ri-star-fill"></i></span>
                   <span><i class="ri-star-fill"></i></span>
                   <span><i class="ri-star-fill"></i></span>
                   <span><i class="ri-star-fill"></i></span>
