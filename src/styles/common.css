@@ -13,3 +13,13 @@
     filter: drop-shadow(1px 01px 22px var(--color-primary));
     font-weight: 600;
 }
+
+@media only screen and (max-widht:768px){
+    .common__section{
+        padding: 70px 0px;
+    }
+    .common__section h1{
+        font-size: 1.2rem;
+    }
+
+}

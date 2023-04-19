@@ -33,3 +33,14 @@
 .search__icon{
     font-size: 1.4rem;
 }
+
+@media only screen and (max-width:768px) {
+    .filter__widget{
+        margin-bottom: 15px;
+    }
+    .filter__widget select{
+        padding: 7px 20px;
+        font-size: .8rem;
+    }
+    
+}

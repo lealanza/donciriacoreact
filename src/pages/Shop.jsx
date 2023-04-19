@@ -18,6 +18,20 @@ const Shop = () => {
 
     setProductsData(filteredProducts);
   };
+  const handleFilterPrice = (e) => {
+    const filterValue = e.target.value;
+  
+    // Ordenar productos por precio
+    const sortedProducts =
+      filterValue === "ascendente"
+        ? [...products].sort((a, b) => a.price - b.price) // Ordenar de menor a mayor precio
+        : filterValue === "descendente"
+        ? [...products].sort((a, b) => b.price - a.price) // Ordenar de mayor a menor precio
+        : products; // Mostrar productos en el orden original
+  
+    setProductsData(sortedProducts);
+  };
+  
 
   const handleSearch = (e) => {
     const searchTern = e.target.value
@@ -30,7 +44,7 @@ const Shop = () => {
        <section>
         <Container>
           <Row>
-            <Col lg='3' md='3'>
+            <Col lg='3' md='6'>
               <div className="filter__widget">
                 <select onChange={handleFilter}>
                   <option value='todos'>Filtro por Categorias</option>
@@ -44,16 +58,16 @@ const Shop = () => {
                 </select>
               </div>
             </Col>
-            <Col lg='3' md='4'>
+            <Col lg='3' md='6'className='text-end'>
             <div className="filter__widget">
-                <select>
-                  <option>Ordenar por</option>
+                <select onChange={(handleFilterPrice)}>
+                  <option value='todos'>Ordenar por</option>
                   <option value="ascendente">Ascendente</option>
                   <option value="descendente">Descendente</option>
                 </select>
               </div>
             </Col>
-            <Col lg='6' md='6'>
+            <Col lg='6' md='12'>
               <div className="search__box">
                 <input  type="text" placeholder='Buscar......' onChange={handleSearch}/> <FcSearch className='search__icon'/>
               </div>

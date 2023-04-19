@@ -59,7 +59,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center'>
-              <h2 className='section__title'>Podructos destacados</h2>
+              <h2 className='section__title'>Productos destacados</h2>
             </Col>
             <ProductsList data={trendingProducts} />
           </Row>
