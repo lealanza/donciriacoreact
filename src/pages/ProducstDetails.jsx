@@ -165,7 +165,7 @@ const ProducstDetails = () => {
                         {
                           reviews?.map((item, index) => (
                             <li key={index} className='mb-4'>
-                              <h6></h6>
+                              <h6>Usuario: Dario</h6>
                               <span>Clasificación: {item.rating}</span>
                               <p>{item.text}</p>
                             </li>
@@ -176,7 +176,7 @@ const ProducstDetails = () => {
                         <h4>Deja tu experiencia</h4>
                         <form action="" onSubmit={handleSubmit}>
                           <div className="form__group">
-                            <input type="text" placeholder='Ingrese su Nombre' ref={userReview} />
+                            <input type="text" placeholder='Ingrese su Nombre' ref={userReview}  required/>
                           </div>
                           <div className="form__group d-flex aling-items-center gap-2 rating__group">
                             <motion.span whileTap={{scale:1.05}} onClick={()=>setRating(1)}>1<i class="ri-star-fill"></i></motion.span>
@@ -186,7 +186,7 @@ const ProducstDetails = () => {
                             <motion.span whileTap={{scale:1.05}} onClick={()=>setRating(5)}>5<i class="ri-star-fill"></i></motion.span>
                           </div>
                           <div className="form__group">
-                            <textarea rows={3} type="text" placeholder='Ingrese su review' ref={msgReview}/>
+                            <textarea rows={3} type="text" placeholder='Ingrese su review' ref={msgReview} required/>
                           </div>
                           <button className='buy__btn text-white'>Enviar</button>
                         </form>

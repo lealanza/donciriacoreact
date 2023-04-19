@@ -28,9 +28,10 @@
 }
 
 .buy__btn{
+    margin-top: 10px;
     position: relative;
-    top: 10px;
-    padding: 10px 20px;
+    top: 15px;
+    padding: 5px 20px;
     font-weight: 400;
     font-size: larger;
     background-color: transparent;
