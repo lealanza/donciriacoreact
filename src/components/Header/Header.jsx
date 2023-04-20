@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 const nav__links = [
     {
         path: 'home',
-        display: 'Inico'
+        display: 'Inicio'
     }, {
         path: 'shop',
         display: 'Tienda'
