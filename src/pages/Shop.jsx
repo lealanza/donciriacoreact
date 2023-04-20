@@ -8,13 +8,14 @@ import products from '../data/data'
 import ProductsList from'../components/Ui/ProductsList'
 
 const Shop = () => {
+  
   const [productsData, setProductsData]= useState(products)
   const handleFilter = (e) => {
     const filterValue = e.target.value;
     const filteredProducts =
-      filterValue === "todos"
-        ? products
-        : products.filter((item) => item.category === filterValue);
+    filterValue === "todos"
+    ? products.filter((item) => item.stock > 0) 
+    : products.filter((item) => item.category === filterValue && item.stock > 0); 
 
     setProductsData(filteredProducts);
   };
@@ -82,7 +83,7 @@ const Shop = () => {
               productsData.length===0 ? (
               <h1 className='text-center fs-4'>No hay productos!!</h1>
               ):
-              <ProductsList data={productsData}/>
+              <ProductsList data={productsData} />
             }
           </Row>
         </Container>

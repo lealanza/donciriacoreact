@@ -12,7 +12,6 @@ import products from '../data/data'
 import { useEffect, useState } from 'react'
 import Clock from '../components/Ui/Clock'
 
-
 const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([])
   const [bestSalesProducts, setBestSalesProducts] = useState([])
@@ -24,13 +23,10 @@ const Home = () => {
     const filterBestSalesProducts = products.filter(item => item.avgRating > '4.5');
     const filterBicicletasMtb = products.filter(item => item.category === 'mtb');
     const filterBicicletasRuta = products.filter(item => item.category === 'ruta');
-
     setTrendingProducts(filterTrendingProducts);
     setBestSalesProducts(filterBestSalesProducts);
     setBicicletasMtb(filterBicicletasMtb);
     setBicicletasRuta(filterBicicletasRuta);
-
-
   }, []);
   return (
     <Helmet title={"Home"}>
@@ -38,7 +34,6 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='6' md='6'>
-
               <div className="hero__content">
                 <p className="hero__subtitle">Lo mas vendido en {year}!</p>
                 <h3>Te traemos lo mejor del mercado, para que tus entrenamientos y salidas sean mas divertidas!!</h3>
@@ -84,7 +79,6 @@ const Home = () => {
                 <h3 className='text-white fs-5 mb-3'>No te duermas!</h3>
               </div>
               <Clock />
-
               <motion.button
                 whileTap={{ scale: 1.2 }}
                 className="buy__btn store__btn">
@@ -94,8 +88,6 @@ const Home = () => {
             <Col lg='6' md='6' className='text-end counter__img'>
               <img src={timerImg} alt="" />
             </Col>
-
-
           </Row>
         </Container>
       </section>

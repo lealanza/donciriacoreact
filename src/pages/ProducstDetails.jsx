@@ -42,23 +42,25 @@ const ProducstDetails = () => {
   }, [product]);
 
   const addToCart = () => {
+    if (stockProducts === 0) {
+      toast.error('No hay más productos');
+      return;
+    }
+  
     dispatch(
-        cartActions.addItem({
-            id: id,
-            productName: productName,
-            price: price,
-            image: imgUrl,
-            stock: stockProducts 
-        }),
-        toast.success('Producto agregado')
-    )
+      cartActions.addItem({
+        id: id,
+        productName: productName,
+        price: price,
+        imgUrl:imgUrl,
+        stock: stockProducts - 1,
+      }),
+    );
     
     setStockProducts(stockProducts - 1); 
-    if(stockProducts===0){
-        toast.error('No hay mas productos')
-    }
+    toast.success('Producto agregado');
+  };
 
-  }
   
   return (
     <Helmet title={productName}>
@@ -89,6 +91,7 @@ const ProducstDetails = () => {
                 </div>
                 {console.log(stockProducts)}
                 <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button>
+
               </div>
             </Col>
           </Row>
