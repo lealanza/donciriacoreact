@@ -59,6 +59,27 @@ const cartSlice = createSlice({
 
       state.totalAmount = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     },
+    deleteItemOne: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.cartItems.find(item => item.id === id);
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+          state.totalQuantity = state.totalQuantity - 1;
+          state.totalAmount = state.totalAmount - existingItem.price;
+        } else {
+          state.cartItems = state.cartItems.filter(item => item.id !== id);
+          state.totalQuantity = state.totalQuantity - existingItem.quantity;
+          state.totalAmount = state.totalAmount - existingItem.price;
+    
+          // Actualizar el stock del producto en data.js
+          const productInData = data.find(item => item.id === id);
+          if (productInData) {
+            productInData.stock += existingItem.quantity;
+          }
+        }
+      }
+    },
   },
 
 });

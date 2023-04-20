@@ -31,7 +31,9 @@ const Cart = () => {
                         <th>Titulo</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
-                        <th>Borrar</th>
+                        <th>Borrar x 1</th>
+                        <th>Borrar Todos</th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -69,6 +71,9 @@ const Tr = ({item}) =>{
   const deleteProduct = () =>{
     dispatch(cartActions.deleteItem(item.id))
   }
+  const deleteProductOne = ()=>{
+    dispatch(cartActions.deleteItemOne(item.id))
+  }
   return(
       <tr>
         <td>
@@ -77,6 +82,7 @@ const Tr = ({item}) =>{
         <td>{item.productName}</td>
         <td>${item.price}</td>
         <td>{item.quantity}</td>
+        <td><span onClick={deleteProductOne}>-1</span></td>
         <td><motion.i whileTap={{ scale: 1.2 }} class="ri-delete-bin-line" onClick={deleteProduct}></motion.i></td>
       </tr>
     )
