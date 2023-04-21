@@ -35,8 +35,14 @@
 }
 
 @media only screen and (max-width:768px) {
+    section .filter__widget{
+        display: flex;
+        justify-content: center;
+        align-items: center ;
+    }
     .filter__widget{
         margin-bottom: 15px;
+        width: 100%;
     }
     .filter__widget select{
         padding: 7px 20px;

@@ -60,7 +60,10 @@ const ProducstDetails = () => {
     setStockProducts(stockProducts - 1); 
     toast.success('Producto agregado');
   };
-
+  const formattedTotal = price.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  });
   
   return (
     <Helmet title={productName}>
@@ -85,11 +88,10 @@ const ProducstDetails = () => {
                   </span>
                 </div>
                 <div>
-                  <p className='product__price'>${price}</p>
+                  <p className='product__price'>{formattedTotal}</p>
                   <p>Categoria: {category}</p>
                   <span className='mt-4'>{shortDesc}</span>
                 </div>
-                {console.log(stockProducts)}
                 <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button>
 
               </div>

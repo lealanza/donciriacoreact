@@ -29,7 +29,7 @@
 }
 .product__card-bottom .price{
     color: var(--color-primary);
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 .product__card-bottom button i{

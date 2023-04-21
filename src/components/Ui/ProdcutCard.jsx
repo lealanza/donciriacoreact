@@ -31,6 +31,10 @@ const ProductCard = ({ item }) => {
         setStockProducts(stockProducts - 1); 
         toast.success('Producto agregado');
       };
+      const formattedTotal = item.price.toLocaleString('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+      });
 
     return (
         <Col lg='3' md='4' className='mb-2'>
@@ -45,9 +49,9 @@ const ProductCard = ({ item }) => {
                 <div className="product__card-bottom d-flex align-item-center justify-content-between p-2">
                     <div className='price__details'>
 
-                        <span className='price'>
-                            Precio: ${item.price}
-                        </span>
+                        <p className='price'>
+                            Precio: <span>{formattedTotal}</span> 
+                        </p>
 
                     </div>
                     {stockProducts > 0 ?
