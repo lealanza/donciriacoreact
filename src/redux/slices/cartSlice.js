@@ -36,7 +36,7 @@ const cartSlice = createSlice({
             } else {
               setTimeout(function() {
                 toast.error('No hay mas stock');
-              }, 3000)
+              }, 1000)
             }
           }
         

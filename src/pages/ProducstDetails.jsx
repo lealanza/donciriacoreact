@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useSelector } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useParams } from 'react-router-dom'
 import products from '../data/data'
@@ -12,8 +12,6 @@ import { cartActions } from '../redux/slices/cartSlice'
 import { toast } from 'react-toastify';
 
 const ProducstDetails = () => {
-  
-
   const [expanded, setExpanded] = useState([]);
   const [rating, setRating] = useState(null)
   const [tab, setTab] = useState('desc')
@@ -86,9 +84,16 @@ const ProducstDetails = () => {
                 <div>
                   <p className='product__price'>${price}</p>
                   <p>Categoria: {category}</p>
+                  <p>Cantidad: {stockProducts}</p>
                   <span className='mt-4'>{shortDesc}</span>
                 </div>
-                <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button>
+                  {stockProducts > 0 && id ?
+                       <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button> :
+                        <span className='stock-unavailable'>
+                            Sin stock
+                        </span>
+                  }
+                
               </div>
             </Col>
           </Row>

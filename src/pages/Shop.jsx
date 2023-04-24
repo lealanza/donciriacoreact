@@ -8,27 +8,26 @@ import products from '../data/data'
 import ProductsList from'../components/Ui/ProductsList'
 
 const Shop = () => {
+  
   const [productsData, setProductsData]= useState(products)
   const handleFilter = (e) => {
     const filterValue = e.target.value;
     const filteredProducts =
-      filterValue === "todos"
-        ? products
-        : products.filter((item) => item.category === filterValue);
+    filterValue === "todos"
+    ? products.filter((item) => item.stock > 0) 
+    : products.filter((item) => item.category === filterValue); 
 
     setProductsData(filteredProducts);
   };
   const handleFilterPrice = (e) => {
     const filterValue = e.target.value;
   
-    // Ordenar productos por precio
     const sortedProducts =
       filterValue === "ascendente"
-        ? [...products].sort((a, b) => a.price - b.price) // Ordenar de menor a mayor precio
+        ? [...products].sort((a, b) => a.price - b.price) 
         : filterValue === "descendente"
-        ? [...products].sort((a, b) => b.price - a.price) // Ordenar de mayor a menor precio
-        : products; // Mostrar productos en el orden original
-  
+        ? [...products].sort((a, b) => b.price - a.price) 
+        : products; 
     setProductsData(sortedProducts);
   };
   
@@ -82,7 +81,7 @@ const Shop = () => {
               productsData.length===0 ? (
               <h1 className='text-center fs-4'>No hay productos!!</h1>
               ):
-              <ProductsList data={productsData}/>
+              <ProductsList data={productsData} />
             }
           </Row>
         </Container>

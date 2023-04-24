@@ -70,6 +70,13 @@ section{
   font-weight: 600;
 }
 
+.stock-unavailable{
+  font-size: 0.8rem;
+  color: red;
+  text-align: center;
+  cursor: no-drop;
+}
+
 @media only screen and (max-width: 768px){
  section{
   padding: 40px 0px;
