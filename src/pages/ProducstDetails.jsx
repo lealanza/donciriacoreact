@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useSelector } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useParams } from 'react-router-dom'
 import products from '../data/data'
@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 
 const ProducstDetails = () => {
   
+
   const [expanded, setExpanded] = useState([]);
   const [rating, setRating] = useState(null)
   const [tab, setTab] = useState('desc')
@@ -48,7 +49,7 @@ const ProducstDetails = () => {
             productName: productName,
             price: price,
             image: imgUrl,
-            stock: stockProducts 
+            stock: stock, 
         }),
         toast.success('Producto agregado')
     )
@@ -87,7 +88,6 @@ const ProducstDetails = () => {
                   <p>Categoria: {category}</p>
                   <span className='mt-4'>{shortDesc}</span>
                 </div>
-                {console.log(stockProducts)}
                 <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button>
               </div>
             </Col>
@@ -109,7 +109,6 @@ const ProducstDetails = () => {
                             <button className='btn__expand' onClick={() => setExpanded(expanded.includes(index) ? expanded.filter(item => item !== index) : [...expanded, index])}>
                               {expanded.includes(index) ? <i class="ri-arrow-up-s-line"></i> : <i class="ri-arrow-down-s-line"></i>}
                             </button>
-
                           </h6>
                           {expanded.includes(index) && (
                             <ul>
