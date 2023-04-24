@@ -7,12 +7,13 @@ import CommonSection from '../components/Ui/CommonSection'
 import '../styles/product-details.css'
 import { motion } from 'framer-motion'
 import ProductsList from '../components/Ui/ProductsList'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '../redux/slices/cartSlice'
 import { toast } from 'react-toastify';
 
 const ProducstDetails = () => {
-
+  const cartItems = useSelector((state) => state.cart.cartItems)
+console.log(cartItems)
   const [expanded, setExpanded] = useState([]);
   const [rating, setRating] = useState(null)
   const [tab, setTab] = useState('desc')
@@ -23,25 +24,28 @@ const ProducstDetails = () => {
   const product = products.find((item) => item.id.toString() === id)
   const { imgUrl, productName, price, avgRating, reviews, description, shortDesc, exp, category, stock } = product;
   const [stockProducts, setStockProducts] = useState(stock);
-  const relatedProducts = products.filter((item) => item.category === category)
-  const handleSubmit = (e) => {
+  const relatedProducts = products.filter((item)=>item.category===category)
+  const handleSubmit = (e) =>{
     e.preventDefault()
     const reviewUserName = userReview.current.value
     const reviewUserText = msgReview.current.value
-
-    const reviewObj = {
+    const reviewObj={
       userName: reviewUserName,
-      text: reviewUserText,
+      text:reviewUserText, 
       rating,
     };
     toast.success('Gracias por tu review!')
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useEffect(()=>{
+    window.scrollTo(0,0);
   }, [product]);
+
   const addToCart = () => {
-    if (stockProducts > 0) {
+    if (stockProducts === 0) {
+      toast.error('No hay más productos');
+      return;
+    }
   
     dispatch(
       cartActions.addItem({
@@ -49,22 +53,13 @@ const ProducstDetails = () => {
         productName: productName,
         price: price,
         imgUrl: imgUrl,
-        stock: stockProducts - 1,
       }),
     );
     
     setStockProducts(stockProducts - 1); 
     toast.success('Producto agregado');
-  }else{
-    toast.error('No hay más productos');
-    
   };
-  }
-
-const formattedTotal = price.toLocaleString('es-AR', {
-  style: 'currency',
-  currency: 'ARS',
-});
+  
 
 return (
   <Helmet title={productName}>
@@ -89,13 +84,13 @@ return (
                 </span>
               </div>
               <div>
-                <p className='product__price'>{formattedTotal}</p>
+                <p className='product__price'>{price}</p>
                 <p>Categoria: {category}</p>
                 <p>Cantidad: {stockProducts}</p>
                 <span className='mt-4'>{shortDesc}</span>
               </div>
-              {stockProducts > 0 ?
-                <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white'onClick={addToCart} disabled={stockProducts === 0}>Comprar</motion.button>
+              {stock > 0 ?
+                <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white'onClick={addToCart}>Comprar</motion.button>
                 :
                 <span className='stock-unavailable'>
                   Sin stock

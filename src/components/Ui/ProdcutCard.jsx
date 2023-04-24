@@ -54,13 +54,13 @@ const ProductCard = ({ item }) => {
                         </p>
 
                     </div>
-                    {stockProducts > 0 ?
-                        <button onClick={addToCart} className='cart-button'>
-                            <i class="ri-add-line"></i>
-                        </button> :
+                    {item.stockProducts = 0 && item.id ?
                         <div className='stock-unavailable'>
                             Sin stock
-                        </div>
+                        </div>:
+                         <button onClick={addToCart} className='cart-button'>
+                         <i class="ri-add-line"></i>
+                     </button>
                     }
                 </div>
             </div>

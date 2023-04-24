@@ -24,10 +24,7 @@ const CheckOut = () => {
       direccion: '',
     },
     onSubmit: (values) => {
-      // Aquí puedes hacer lo que necesites con los valores del formulario
-      console.log(values);
-      // Redirigir al login
-      window.location.href = '/login';
+           window.location.href = '/login';
     },
     validate: (values) => {
       const errors = {};
