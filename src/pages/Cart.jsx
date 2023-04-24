@@ -13,6 +13,10 @@ const Cart = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems)
   const totalAmount = useSelector ((state)=> state.cart.totalAmount)
+  const formattedTotal = totalAmount.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  });
   return (
     <Helmet title={"Cart"}>
       <CommonSection title={'Carrito de compras!!'} />
@@ -22,7 +26,7 @@ const Cart = () => {
             <Col lg='9'>
               {
                 cartItems.length === 0 ? (
-                  <h2 className='fs4 text-center'>No agrego ningun producto la carrito</h2>
+                  <h2 className='fs-4 text-center'>No agrego ningun producto la carrito</h2>
                 ) : (
                   <table className="table borderred">
                     <thead>
@@ -32,6 +36,8 @@ const Cart = () => {
                         <th>Precio</th>
                         <th>Cantidad</th>
                         <th>Borrar</th>
+                        <th>Borrar Todos</th>
+
                       </tr>
                     </thead>
                     <tbody>
@@ -47,7 +53,7 @@ const Cart = () => {
             </Col>
             <Col lg='3'>
               <div>
-                <h6 className='d-flex align-items-center justify-content-between'>Subtotal: <span className='fs-4 fw-bold'>${totalAmount}</span></h6>
+                <h6 className='d-flex align-items-center justify-content-between'>Subtotal: <span className='fs-4 fw-bold'>{formattedTotal}</span></h6>
                 
                 <p className='fs-6 mt-2'>costos de envios podras calcular ....</p>
                 <div>
@@ -69,6 +75,9 @@ const Tr = ({item}) =>{
   const deleteProduct = () =>{
     dispatch(cartActions.deleteItem(item.id))
   }
+  const deleteProductOne = ()=>{
+    dispatch(cartActions.deleteItemOne(item.id))
+  }
   return(
       <tr>
         <td>
@@ -77,7 +86,8 @@ const Tr = ({item}) =>{
         <td>{item.productName}</td>
         <td>${item.price}</td>
         <td>{item.quantity}</td>
-        <td><motion.i whileTap={{ scale: 1.2 }} class="ri-delete-bin-line" onClick={deleteProduct}></motion.i></td>
+        <td><motion.i onClick={deleteProductOne} className='ri-delete-bin-4-fill delete__btn'></motion.i></td>
+        <td><motion.i whileTap={{ scale: 1.2 }} class="ri-delete-bin-6-fill" onClick={deleteProduct}></motion.i></td>
       </tr>
     )
 

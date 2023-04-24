@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import '../../styles/product-card.css'
 import { Col } from 'reactstrap'
 import { motion } from 'framer-motion'
@@ -10,26 +10,31 @@ import { toast } from 'react-toastify';
 
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch()
-    const [stockProducts, setStockProducts] = useState(item.stock);
+    const [stockProducts, setStockProducts] = useState(item.stock)
 
     const addToCart = () => {
-        dispatch(
-            cartActions.addItem({
-                id: item.id,
-                productName: item.productName,
-                price: item.price,
-                imgUrl: item.imgUrl,
-                stock: stockProducts
-            }),
-            toast.success('Producto agregado')
-        )
-
-        setStockProducts(stockProducts - 1);
         if (stockProducts === 0) {
-            toast.error('No hay stock')
+          toast.error('No hay más productos');
+          return;
         }
-
-    }
+      
+        dispatch(
+          cartActions.addItem({
+            id: item.id,
+            productName: item.productName,
+            price: item.price,
+            imgUrl: item.imgUrl,
+            stock: item.stockProducts - 1,
+          }),
+        );
+        
+        setStockProducts(stockProducts - 1); 
+        toast.success('Producto agregado');
+      };
+      const formattedTotal = item.price.toLocaleString('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+      });
 
     return (
         <Col lg='3' md='4' className='mb-2'>
@@ -44,9 +49,9 @@ const ProductCard = ({ item }) => {
                 <div className="product__card-bottom d-flex align-item-center justify-content-between p-2">
                     <div className='price__details'>
 
-                        <span className='price'>
-                            Precio: ${item.price}
-                        </span>
+                        <p className='price'>
+                            Precio: <span>{formattedTotal}</span> 
+                        </p>
 
                     </div>
                     {stockProducts > 0 && item.id ?

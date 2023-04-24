@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
-
+import data from '../../data/data'; 
 const initialState = {
     cartItems:[],
     totalAmount:0,
@@ -24,33 +24,63 @@ const cartSlice = createSlice({
               productName: newItem.productName,
               imgUrl: newItem.imgUrl,
               price: newItem.price,
-              quantity: newItem.quantity, // cambiar a la cantidad del nuevo producto
-              totalPrice: newItem.price * newItem.quantity,
+              quantity: 1,
+              totalPrice: newItem.price,
             });
-            newItem.stock--;
           } else {
-            if (existingItem.quantity < stock) {
-              existingItem.quantity++;
-              existingItem.totalPrice += existingItem.price;
-              existingItem.stock--;
-            } else {
-              setTimeout(function() {
-                toast.error('No hay mas stock');
-              }, 1000)
-            }
+            existingItem.quantity++;
+            existingItem.totalPrice = Number(existingItem.totalPrice) * Number(existingItem.price);
           }
         
           state.totalAmount = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
         },
-          deleteItem:(state, action) => {
-            const id =action.payload
-            const existingItem= state.cartItems.find(item=>item.id===id)
-            if(existingItem){
-              state.cartItems= state.cartItems.filter(item=>item.id!==id)
-              state.totalQuantity = state.totalQuantity-existingItem.quantity
+        deleteItem: (state, action) => {
+          const id = action.payload;
+          const existingItem = state.cartItems.find(item => item.id === id);
+          if (existingItem) {
+            state.cartItems = state.cartItems.filter(item => item.id !== id);
+            state.totalQuantity = state.totalQuantity - existingItem.quantity;
+    
+            // Actualizar el stock del producto en data.js
+            const productInData = data.find(item => item.id === id);
+            if (productInData) {
+              productInData.stock += existingItem.quantity;
             }
-            state.totalAmount = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-          }},
-  });
-export const cartActions = cartSlice.actions
-export default cartSlice.reducer
+          }
+    
+          state.totalAmount = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        },
+        deleteItemOne: (state, action) => {
+          const id = action.payload;
+      const existingItem = state.cartItems.find(item => item.id === id);
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+          state.totalQuantity = state.totalQuantity - 1;
+          state.totalAmount = state.totalAmount - existingItem.price;
+    
+          // Actualizar el stock del producto en data.js
+          const productInData = data.find(item => item.id === id);
+          if (productInData) {
+            productInData.stock += 1;
+          }
+        } else {
+          state.cartItems = state.cartItems.filter(item => item.id !== id);
+          state.totalQuantity = state.totalQuantity - existingItem.quantity;
+          state.totalAmount = state.totalAmount - existingItem.price;
+    
+          // Actualizar el stock del producto en data.js
+          const productInData = data.find(item => item.id === id);
+          if (productInData) {
+            productInData.stock += existingItem.quantity;
+          }
+        }
+      }
+        },
+      },
+    
+    });
+    
+    export const cartActions = cartSlice.actions;
+    export default cartSlice.reducer;
+    
