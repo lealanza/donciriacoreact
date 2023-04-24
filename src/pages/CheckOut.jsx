@@ -1,15 +1,10 @@
 import React from 'react';
-import {  useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import { Formik } from 'formik'
-import {  Form, Field } from 'formik';
-import * as Yup from 'yup';
+import {  useFormik } from 'formik';
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/Ui/CommonSection';
 import '../styles/checkout.css';
-
-
 
 const CheckOut = () => {
   const total = useSelector((state) => state.cart.totalQuantity);
@@ -18,13 +13,51 @@ const CheckOut = () => {
     style: 'currency',
     currency: 'ARS',
   });
+  const formik = useFormik({
+    initialValues: {
+      nombre: '',
+      email: '',
+      telefono: '',
+      provincia: '',
+      localidad: '',
+      codigoPostal: '',
+      direccion: '',
+    },
+    onSubmit: (values) => {
+      // Aquí puedes hacer lo que necesites con los valores del formulario
+      console.log(values);
+      // Redirigir al login
+      window.location.href = '/login';
+    },
+    validate: (values) => {
+      const errors = {};
 
-  const history = useNavigate();
+      if (!values.nombre) {
+        errors.nombre = 'El nombre es requerido';
+      }
+      if (!values.email) {
+        errors.email = 'El email es requerido';
+      }
+      if (!values.telefono) {
+        errors.telefono = 'El telefono es requerido';
+      }
+      if (!values.provincia) {
+        errors.provincia = 'La provincia es requerida';
+      }
+      if (!values.localidad) {
+        errors.localidad = 'La localidad es requerida';
+      }
+      if (!values.codigoPostal) {
+        errors.codigoPostal = 'El codigo postal es requerido';
+      }
+      if (!values.direccion) {
+        errors.direccion = 'La direccion es requerida';
+      }
+      
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    history.push('/login');
-  };
+      return errors;
+    },
+  });
 
   return (
     <>
@@ -34,72 +67,116 @@ const CheckOut = () => {
           <Row>
             <Col lg='8'>
               <h6 className='mb-4 mt-5 fw-bold'>Información de facturación</h6>
-              <Formik
-                initialValues={{
-                  name: '',
-                  email: '',
-                  phone: '',
-                  province: '',
-                  city: '',
-                  postalCode: '',
-                  address: '',
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={CheckOutSchema}
-              >
-                {({ errors, touched }) => (
-                  <Form className='billing__form'>
-                    <div className="form__group">
-                      <label htmlFor="name">Nombre</label>
-                      <Field type="text" name="name" placeholder="Nombre" />
-                      {errors.name && touched.name && <div className="error">{errors.name}</div>}
-                    </div>
-                    <div className="form__group">
-                      <label htmlFor="email">Email</label>
-                      <Field type="email" name="email" placeholder="Email" />
-                      {errors.email && touched.email && <div className="error">{errors.email}</div>}
-                    </div>
-                    <div className="form__group">
-                      <label htmlFor="phone">Teléfono</label>
-                      <Field type="text" name="phone" placeholder="Teléfono" />
-                      {errors.phone && touched.phone && <div className="error">{errors.phone}</div>}
-                    </div>
-                    <div className="form__group">
-                      <label htmlFor="province">Provincia</label>
-                      <Field type="text" name="province" placeholder="Provincia" />
-                      {errors.province && touched.province && <div className="error">{errors.province}</div>}
-                    </div>
-                    <div className="form__group">
-                      <Field type="text" name="city" placeholder='Localidad' />
-                      <errors.city name="city" component="div" className="error" />
-                    </div>
-                    <div className="form__group">
-                      <Field type="text" name="postalCode" placeholder='Codigo Postal' />
-                      <errors.postalCode name="postalCode" component="div" className="error" />
-                    </div>
-                    <div className="form__group">
-                      <Field type="text" name="address" placeholder='Dirrecion' />
-                      <errors.address name="address" component="div" className="error" />
-                    </div>
-                  </Form>)}
-              </Formik>
-            </Col>   
-          <Col lg='4'>
-            <div className="checkout__cart mt-5">
-              <h6>Total Prodcutos: <span>{total} productos</span></h6>
-              <h6>SubTotal:<span>{formattedTotal}</span></h6>
-              <h6><span>Envio: <br />Envio Gratis</span><span>0</span></h6>
-              <h4>Total a pagar: <span>{formattedTotal}</span></h4>
-              <button className='buy__btn auth__btn w-100 text-white mb-3' type='submit'>
-                  Haz tu pedido
-                </button>           
-               </div>
-          </Col>
+                <form onSubmit={formik.handleSubmit} className='form__group'>
+                  <label htmlFor="nombre">Nombre:</label>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.nombre}
+                    className={formik.touched.nombre && formik.errors.nombre ? 'has-error' : ''}
+                  />
+                  {formik.touched.nombre && formik.errors.nombre ? (
+                    <div>{formik.errors.nombre}</div>
+                  ) : null}
+
+                  <label htmlFor="email">Email:</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    className={formik.touched.email && formik.errors.email ? 'has-error' : ''}
+                  />
+                  {formik.touched.email && formik.errors.email ? (
+                    <div>{formik.errors.email}</div>
+                  ) : null}
+
+                  <label htmlFor="telefono">Teléfono:</label>
+                  <input
+                    id="telefono"
+                    name="telefono"
+                    type="number"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.telefono}
+                    className={formik.touched.telefono && formik.errors.telefono ? 'has-error' : ''}
+                  />
+                   {formik.touched.telefono && formik.errors.telefono ? (
+                    <div>{formik.errors.telefono}</div>
+                  ) : null}
+                  <label htmlFor="provincia">Provincia:</label>
+                  <input
+                    id="provincia"
+                    name="provincia"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.provincia}
+                    className={formik.touched.provincia && formik.errors.provincia ? 'has-error' : ''}
+                  />
+                   {formik.touched.provincia && formik.errors.provincia ? (
+                    <div>{formik.errors.provincia}</div>
+                  ) : null}
+                  <label htmlFor="localidad">Localidad:</label>
+                  <input
+                    id="localidad"
+                    name="localidad"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.localidad}
+                    className={formik.touched.localidad && formik.errors.localidad ? 'has-error' : ''}
+                  />
+                   {formik.touched.localidad && formik.errors.localidad ? (
+                    <div>{formik.errors.localidad}</div>
+                  ) : null}
+                  <label htmlFor="codigoPostal">Codigo Postal:</label>
+                  <input
+                    id="codigoPostal"
+                    name="codigoPostal"
+                    type="number"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.codigoPostal}
+                    className={formik.touched.codigoPostal && formik.errors.codigoPostal ? 'has-error' : ''}
+                  />
+                   {formik.touched.codigoPostal && formik.errors.codigoPostal ? (
+                    <div>{formik.errors.codigoPostal}</div>
+                  ) : null}
+                   <label htmlFor="direccion">Direccion:</label>
+                  <input
+                    id="direccion"
+                    name="direccion"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.direccion}
+                    className={formik.touched.direccion && formik.errors.direccion ? 'has-error' : ''}
+                  />         
+                   {formik.touched.direccion && formik.errors.direccion ? (
+                    <div>{formik.errors.direccion}</div>
+                  ) : null}         
+                </form>
+            </Col>
+            <Col lg='4'>
+              <div className="checkout__cart mt-5">
+                <h6>Total Prodcutos: <span>{total} productos</span></h6>
+                <h6>SubTotal:<span>{formattedTotal}</span></h6>
+                <h6><span>Envio: <br />Envio Gratis</span><span>0</span></h6>
+                <h4>Total a pagar: <span>{formattedTotal}</span></h4>
+                <button onClick={formik.submitForm} className='buy__btn text-white'>Validar y continuar</button>
+              </div>
+            </Col>
           </Row>
         </Container>
       </Helmet>
     </>
-   )
-  }
-  
-  export default CheckOut
+  )
+}
+
+export default CheckOut

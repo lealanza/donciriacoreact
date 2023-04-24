@@ -78,20 +78,20 @@
     margin-bottom: 30px;
 }
 
-.form__group input, .form__group textarea{
+.form__groups input, .form__groups textarea{
     width: 100%;
     border: 1px solid var(--color-primary);
     border-radius: 5px;
     padding: 8px 20px;
 }
-.form__group input:focus, .form__group textarea:focus{
+.form__groups input:focus, .form__groups textarea:focus{
     outline: none;
 }
 
-.form__group{
+.form__groups{
     margin-bottom: 20px;
 }
-.form__group{
+.form__groups{
     display: flex;
     align-items: center;
     column-gap: 5px;

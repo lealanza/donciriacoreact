@@ -1,7 +1,39 @@
-.billing__form .form__group input{
-    border: 1px solid var(--card-bg-02);
-
+.form__group{
+    display: flex;
+    flex-direction: column;
 }
+
+
+.form__group label{
+    text-align: left;
+    display: block;
+    margin-bottom: 8px;
+}
+.form__group input[type='text'],
+.form__group input[type='email'],
+.form__group input[type='number'],
+.form__group input[type='tel'] {
+    display: flex;
+    flex-direction: column;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+margin-bottom: 16px;
+}
+
+.form__group input.has-error {
+    border-color: red;
+}
+
+.form__group .error-message {
+color: red;
+font-size: 12px;
+margin-bottom: 8px;
+}
+
+
 
 .checkout__cart{
     padding: 20px;
