@@ -1,66 +1,43 @@
-.form__group{
-    display: flex;
-    flex-direction: column;
-}
 
-
-.form__group label{
+.billing__form .form__group input{
     text-align: left;
     display: block;
     margin-bottom: 8px;
 }
 .form__group input[type='text'],
 .form__group input[type='email'],
+.form__group input[type='password'],
 .form__group input[type='number'],
 .form__group input[type='tel'] {
     display: flex;
     flex-direction: column;
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
-
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--color-primary);
 }
-
-.form__group input.has-error {
-    border-color: red;
-    
-}
-
-.error-message {
-    color: red;
-   
-}
-
-.form__group .error-message {
-color: red;
-font-size: 12px;
-margin-bottom: 8px;
-}
-
-
-
 .checkout__cart{
     padding: 20px;
     background: var(--color-second);
     color: white;
     border-radius: 10px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
-
 .checkout__cart h6, h4{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .checkout__cart h6{
     margin-bottom: 20px;
 }
-
 .checkout__cart h4{
    border-top: 1px solid var(--color-primary);
    padding: 10px;
-  
+}
+.checkout__cart button{
+    margin-bottom: 10px;
 }
