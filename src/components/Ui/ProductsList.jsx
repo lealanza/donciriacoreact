@@ -8,7 +8,6 @@ const ProductsList = ({ data }) => {
         <ProdcutCard 
           item={item} 
           key={index} 
-          isOutOfStock={item.stock <= 0} 
         />
       ))}
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import {  useFormik } from 'formik';
+import { useFormik } from 'formik';
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/Ui/CommonSection';
 import '../styles/checkout.css';
@@ -24,7 +24,7 @@ const CheckOut = () => {
       direccion: '',
     },
     onSubmit: (values) => {
-           window.location.href = '/login';
+      window.location.href = '/login';
     },
     validate: (values) => {
       const errors = {};
@@ -50,7 +50,7 @@ const CheckOut = () => {
       if (!values.direccion) {
         errors.direccion = 'La direccion es requerida';
       }
-      
+
 
       return errors;
     },
@@ -64,21 +64,22 @@ const CheckOut = () => {
           <Row>
             <Col lg='8'>
               <h6 className='mb-4 mt-5 fw-bold'>Información de facturación</h6>
-                <form onSubmit={formik.handleSubmit} className='form__group'>
-                  <label htmlFor="nombre">Nombre:</label>
-                  <input
-                    id="nombre"
-                    name="nombre"
-                    type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.nombre}
-                    className={formik.touched.nombre && formik.errors.nombre ? 'has-error' : ''}
-                  />
-                  {formik.touched.nombre && formik.errors.nombre ? (
-                    <div>{formik.errors.nombre}</div>
-                  ) : null}
+              <form onSubmit={formik.handleSubmit} className='form__group'>
+                <label htmlFor="nombre">Nombre:</label>
+                <input
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.nombre}
+                  className={formik.touched.nombre && formik.errors.nombre ? 'has-error' : ''}
+                />
+                {formik.touched.nombre && formik.errors.nombre ? (
+                  <span className="error-message">{formik.errors.nombre}</span>
+                ) : null}
 
+     
                   <label htmlFor="email">Email:</label>
                   <input
                     id="email"
@@ -90,75 +91,77 @@ const CheckOut = () => {
                     className={formik.touched.email && formik.errors.email ? 'has-error' : ''}
                   />
                   {formik.touched.email && formik.errors.email ? (
-                    <div>{formik.errors.email}</div>
+                    <span className="error-message">{formik.errors.email}</span>
                   ) : null}
 
-                  <label htmlFor="telefono">Teléfono:</label>
-                  <input
-                    id="telefono"
-                    name="telefono"
-                    type="number"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.telefono}
-                    className={formik.touched.telefono && formik.errors.telefono ? 'has-error' : ''}
-                  />
-                   {formik.touched.telefono && formik.errors.telefono ? (
-                    <div>{formik.errors.telefono}</div>
-                  ) : null}
-                  <label htmlFor="provincia">Provincia:</label>
-                  <input
-                    id="provincia"
-                    name="provincia"
-                    type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.provincia}
-                    className={formik.touched.provincia && formik.errors.provincia ? 'has-error' : ''}
-                  />
-                   {formik.touched.provincia && formik.errors.provincia ? (
-                    <div>{formik.errors.provincia}</div>
-                  ) : null}
-                  <label htmlFor="localidad">Localidad:</label>
-                  <input
-                    id="localidad"
-                    name="localidad"
-                    type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.localidad}
-                    className={formik.touched.localidad && formik.errors.localidad ? 'has-error' : ''}
-                  />
-                   {formik.touched.localidad && formik.errors.localidad ? (
-                    <div>{formik.errors.localidad}</div>
-                  ) : null}
-                  <label htmlFor="codigoPostal">Codigo Postal:</label>
-                  <input
-                    id="codigoPostal"
-                    name="codigoPostal"
-                    type="number"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.codigoPostal}
-                    className={formik.touched.codigoPostal && formik.errors.codigoPostal ? 'has-error' : ''}
-                  />
-                   {formik.touched.codigoPostal && formik.errors.codigoPostal ? (
-                    <div>{formik.errors.codigoPostal}</div>
-                  ) : null}
-                   <label htmlFor="direccion">Direccion:</label>
-                  <input
-                    id="direccion"
-                    name="direccion"
-                    type="text"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.direccion}
-                    className={formik.touched.direccion && formik.errors.direccion ? 'has-error' : ''}
-                  />         
-                   {formik.touched.direccion && formik.errors.direccion ? (
-                    <div>{formik.errors.direccion}</div>
-                  ) : null}         
-                </form>
+                 
+              
+                <label htmlFor="telefono">Teléfono:</label>
+                <input
+                  id="telefono"
+                  name="telefono"
+                  type="number"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.telefono}
+                  className={formik.touched.telefono && formik.errors.telefono ? 'has-error' : ''}
+                />
+                {formik.touched.telefono && formik.errors.telefono ? (
+                  <span className="error-message">{formik.errors.telefono}</span>
+                ) : null}
+                <label htmlFor="provincia">Provincia:</label>
+                <input
+                  id="provincia"
+                  name="provincia"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.provincia}
+                  className={formik.touched.provincia && formik.errors.provincia ? 'has-error' : ''}
+                />
+                {formik.touched.provincia && formik.errors.provincia ? (
+                  <span className="error-message">{formik.errors.provincia}</span>
+                ) : null}
+                <label htmlFor="localidad">Localidad:</label>
+                <input
+                  id="localidad"
+                  name="localidad"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.localidad}
+                  className={formik.touched.localidad && formik.errors.localidad ? 'has-error' : ''}
+                />
+                {formik.touched.localidad && formik.errors.localidad ? (
+                  <span className="error-message">{formik.errors.localidad}</span>
+                ) : null}
+                <label htmlFor="codigoPostal">Codigo Postal:</label>
+                <input
+                  id="codigoPostal"
+                  name="codigoPostal"
+                  type="number"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.codigoPostal}
+                  className={formik.touched.codigoPostal && formik.errors.codigoPostal ? 'has-error' : ''}
+                />
+                {formik.touched.codigoPostal && formik.errors.codigoPostal ? (
+                  <span className="error-message">{formik.errors.codigoPostal}</span>
+                ) : null}
+                <label htmlFor="direccion">Direccion:</label>
+                <input
+                  id="direccion"
+                  name="direccion"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.direccion}
+                  className={formik.touched.direccion && formik.errors.direccion ? 'has-error' : ''}
+                />
+                {formik.touched.direccion && formik.errors.direccion ? (
+                  <span className="error-message">{formik.errors.direccion}</span>
+                ) : null}
+              </form>
             </Col>
             <Col lg='4'>
               <div className="checkout__cart mt-5">

@@ -20,11 +20,17 @@
   border: 1px solid #ccc;
 border-radius: 4px;
 box-sizing: border-box;
-margin-bottom: 16px;
+
 }
 
 .form__group input.has-error {
     border-color: red;
+    
+}
+
+.error-message {
+    color: red;
+   
 }
 
 .form__group .error-message {

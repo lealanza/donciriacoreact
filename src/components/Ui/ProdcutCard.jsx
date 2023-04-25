@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import '../../styles/product-card.css'
 import { Col } from 'reactstrap'
 import { motion } from 'framer-motion'
@@ -7,31 +7,35 @@ import { useDispatch } from 'react-redux'
 import { cartActions } from '../../redux/slices/cartSlice'
 import { toast } from 'react-toastify';
 
+
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch()
     const [stockProducts, setStockProducts] = useState(item.stock)
-    const [newItem, setNewItem] = useState(item.id)
+
     const addToCart = () => {
         if (stockProducts === 0) {
-            toast.error('No hay más productos');
-            return;
+          toast.error('No hay más productos');
+          return;
         }
+      
         dispatch(
-            cartActions.addItem({
-                id: item.id,
-                productName: item.productName,
-                price: item.price,
-                imgUrl: item.imgUrl,
-                stock: stockProducts - 1,
-            }),
+          cartActions.addItem({
+            id: item.id,
+            productName: item.productName,
+            price: item.price,
+            imgUrl: item.imgUrl,
+            stock: stockProducts - 1,
+          }),
         );
-        setStockProducts(stockProducts - 1);
+        
+        setStockProducts(stockProducts - 1); 
         toast.success('Producto agregado');
-    };
-    const formattedTotal = item.price.toLocaleString('es-AR', {
+      };
+      const formattedTotal = item.price.toLocaleString('es-AR', {
         style: 'currency',
         currency: 'ARS',
-    });
+      });
+
     return (
         <Col lg='3' md='4' className='mb-2'>
             <div className="product__item">
@@ -46,19 +50,24 @@ const ProductCard = ({ item }) => {
                     <div className='price__details'>
 
                         <p className='price'>
-                            Precio: <span>{formattedTotal}</span>
+                            Precio: <span>{formattedTotal}</span> 
                         </p>
+
                     </div>
-                    {item.stock === 0 && item.id === newItem ? (
-                        <div className='stock-unavailable'>Sin stock</div>
-                    ) : (
-                        <button onClick={addToCart} className='cart-button' disabled={item.stock === 0 && item.id !== newItem}>
-                            <i class='ri-add-line'></i>
-                        </button>
-                    )}
+                    {item.stock === 0?
+                        <div className='stock-unavailable'>
+                            Sin stock
+                        </div>:
+                         <button onClick={addToCart} className='cart-button'>
+                         <i class="ri-add-line"></i>
+                     </button>
+                    }
                 </div>
             </div>
         </Col>
     )
 }
+
+
+
 export default ProductCard
