@@ -12,10 +12,13 @@
 .logo{
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: auto;
     column-gap: 8px;
     line-height: 70px;
 }
 .logo img{
+    
     width: 7rem;
     filter: drop-shadow( 5px 5px 5px #000000 );
 }
@@ -69,9 +72,40 @@
     color: var(--color-primary);
     cursor: pointer;
 }
-.nav__icons span img{
-    width: 30px;
-    height: 30px;
+.nav__icons .profile img{
+    max-width: 30px;
+    max-height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.nav__icons .profile{
+    position: relative;
+    z-index: 9;
+}
+.profile__actions{
+    position: absolute;
+    top: 98%;
+    left: 0;
+    width: 150px;
+    z-index: 10;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--card-bg-03);
+    line-height: 30px;
+    display: none;
+    cursor: pointer;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.profile__actions a{
+    margin: 5px;
+    text-decoration: none;
+}
+
+.show__profile-actions{
+    display: block;
 }
 
 .mobile__menu{

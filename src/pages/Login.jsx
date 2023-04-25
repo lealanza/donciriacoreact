@@ -6,6 +6,8 @@ import '../styles/login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firabase.config'
 import { toast } from 'react-toastify'
+import Spinners from '../components/Ui/Spinners'
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ const Login = () => {
       console.log(user)
       setLoading(false)
       toast.success('Iniciando sesión con éxito')
-      navigate('/checkout')
+      navigate('/checkOut')
     } catch (error) {
       setLoading(false)
       toast.error(error.message)
@@ -38,7 +40,7 @@ const Login = () => {
             {
               loading ? 
               (
-                <Col lg='12' className='text-center'><h3 className='fw-bold'>Cargando.....</h3></Col>
+                <Col lg='12' className='text-center'><h3 className='fw-bold'><Spinners/></h3></Col>
               ):(
               <Col lg='6' className='m-auto text-center'>
               <h3 className='mb-4 fw-bold'>Login</h3>

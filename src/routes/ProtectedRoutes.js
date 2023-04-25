@@ -4,9 +4,9 @@ import { Navigate } from 'react-router-dom'
 
 const ProtectedRoutes = ({children}) => {
 
-    const {currentUser} = useAuth ()
+    const { currentUser } = useAuth ()
 
-  return currentUser ? children : <Navigate to='/login'/>
+  return (currentUser ? children : <Navigate to='/login'/>)
 }
 
 export default ProtectedRoutes

@@ -8,6 +8,9 @@ import { HiOutlineMenu } from 'react-icons/hi'
 import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
 import useAuth from '../../custom-hooks/useAuth'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../firabase.config'
+import { toast } from 'react-toastify'
 
 const nav__links = [
     {
@@ -29,6 +32,7 @@ const Header = () => {
     const headerRef = useRef(null)
     const menuRef = useRef(null)
     const totalQuantity = useSelector(state=>state.cart.totalQuantity)
+    const profileActionsRef = useRef(null)
 
     const {currentUser} = useAuth()
     const stickyHeaderFunc = () => {
@@ -41,6 +45,14 @@ const Header = () => {
 
         })
     }
+    const logout = () =>{
+        signOut(auth).then(()=>{
+            toast.success('Cerro sesion')
+            navigate("/home")
+        }).catch(err=>{
+            toast.err(err.message)
+        })
+    }
     useEffect(()=>{
         stickyHeaderFunc()
         return ()=> window.removeEventListener('scroll', stickyHeaderFunc)
@@ -49,8 +61,9 @@ const Header = () => {
 
     const navigateToCart= ()=>{
         navigate('/cart')
-
     }
+
+    const toglleProfileActions = ()=>{profileActionsRef.current.classList.toggle('show__profile-actions')}
 
 
     return (
@@ -86,9 +99,27 @@ const Header = () => {
                                 <span className="badge">{totalQuantity}</span>
                             </span>
 
-                            <span>
-                                <motion.img whileTap={{ scale: 1.3 }} src={currentUser ? currentUser.photoUrl: user} alt="" />
-                            </span>
+                            <div className='profile'>
+                                <motion.img
+                                 whileTap={{ scale: 1.2 }} 
+                                 src={currentUser ? currentUser.photoURL: user} 
+                                 alt="" 
+                                 onClick={toglleProfileActions} 
+                                 />
+                                <div 
+                                className="profile__actions" 
+                                ref={profileActionsRef} 
+                                onClick={toglleProfileActions}>
+                                    {currentUser ?( 
+                                        <span onClick={logout}>Logout</span>
+                                    ):(
+                                        <div className='d-flex align-items-center justify-content-center flex-column'>
+                                            <Link to='/singup' >Singup</Link>
+                                            <Link to='/login' >Login</Link>
+                                        </div>
+                                        )}
+                                </div>
+                            </div>
                             <div className="mobile__menu">
                                 <span onClick={menuToggle}>
                                     <HiOutlineMenu />

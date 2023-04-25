@@ -20,7 +20,14 @@ const Routers = () => {
         <Route path='shop' element={<Shop/>}/>
         <Route path='shop/:id' element={<ProductDetails/>}/>
         <Route path='cart' element={<Cart/>}/>
-        <Route path='checkOut' element={<ProtectedRoutes><CheckOut/></ProtectedRoutes>}/>
+        <Route 
+          path='checkOut' 
+          element={
+            <ProtectedRoutes>
+            <CheckOut/>
+            </ProtectedRoutes>
+          }
+        />
         <Route path='login' element={<Login/>}/>
         <Route path='singUp' element={<SingUp/>}/>
        <Route path='*' element={<Error/>}/>

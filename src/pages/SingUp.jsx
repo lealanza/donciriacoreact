@@ -10,6 +10,7 @@ import { auth } from '../firabase.config';
 import { storage } from '../firabase.config'
 import { db } from '../firabase.config'
 import { toast } from 'react-toastify';
+import Spinners from '../components/Ui/Spinners'
 
 const SingUp = () => {
   const [username, setUsername] = useState('')
@@ -29,7 +30,7 @@ const SingUp = () => {
         email, 
         password)
         const user = userCredential.user;
-        const storageRef = ref(storage,`images/${Date.now() + username}` )  
+        const storageRef = ref(storage,`images/${ Date.now() + username}` )  
         const uploadTask = uploadBytesResumable( storageRef, file)
         uploadTask.on((error) =>{
           toast.error(error.message)
@@ -73,7 +74,7 @@ const SingUp = () => {
             {
               loading ? (
                 <Col lg='12' className='text-center'>
-                  <h3 className='fw-bold'>Cargando......</h3>
+                  <h3 className='fw-bold'><Spinners/></h3>
                 </Col>
               ):
               (
