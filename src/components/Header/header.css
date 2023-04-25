@@ -73,6 +73,7 @@
     cursor: pointer;
 }
 .nav__icons .profile img{
+    background-color: red;
     max-width: 30px;
     max-height: 30px;
     cursor: pointer;
