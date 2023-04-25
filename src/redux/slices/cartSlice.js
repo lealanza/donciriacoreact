@@ -18,11 +18,11 @@ const cartSlice = createSlice({
     
       // Verificar si hay suficiente stock
       const productInData = data.find(item => item.id === newItem.id);
-      if (!productInData || productInData.stock < 1) {
+      if (!productInData.id || productInData.stock ===0) {
         toast.error('No hay suficiente stock disponible');
         return;
       }
-    
+      console.log(productInData.stock)
       state.totalQuantity++;
       if (!existingItem) {
         state.cartItems.push({
@@ -39,7 +39,10 @@ const cartSlice = createSlice({
       }
     
       // Actualizar el stock del producto en data.js
-      productInData.stock--;
+      const index = data.findIndex(item => item.id === newItem.id);
+      if (index !== -1) {
+        data[index].stock--;
+      }
     
       state.totalAmount = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     },

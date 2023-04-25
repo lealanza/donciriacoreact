@@ -7,13 +7,11 @@ import CommonSection from '../components/Ui/CommonSection'
 import '../styles/product-details.css'
 import { motion } from 'framer-motion'
 import ProductsList from '../components/Ui/ProductsList'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { cartActions } from '../redux/slices/cartSlice'
 import { toast } from 'react-toastify';
 
 const ProducstDetails = () => {
-  const cartItems = useSelector((state) => state.cart.cartItems)
-console.log(cartItems)
   const [expanded, setExpanded] = useState([]);
   const [rating, setRating] = useState(null)
   const [tab, setTab] = useState('desc')
@@ -49,10 +47,10 @@ console.log(cartItems)
   
     dispatch(
       cartActions.addItem({
-        id: id,
-        productName: productName,
-        price: price,
-        imgUrl: imgUrl,
+        id: product.id,
+        productName: product.productName,
+        price: product.price,
+        imgUrl: product.imgUrl,
       }),
     );
     
@@ -89,12 +87,12 @@ return (
                 <p>Cantidad: {stockProducts}</p>
                 <span className='mt-4'>{shortDesc}</span>
               </div>
-              {stock > 0 ?
-                <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white'onClick={addToCart}>Comprar</motion.button>
-                :
+              {stockProducts === 0 ?
                 <span className='stock-unavailable'>
                   Sin stock
                 </span>
+                :
+                <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white'onClick={addToCart}>Comprar</motion.button>
               }
             </div>
           </Col>
