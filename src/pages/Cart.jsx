@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect}from 'react'
 import Helmet from '../components/Helmet/Helmet'
 import '../styles/cart.css'
 import CommonSection from '../components/Ui/CommonSection'
@@ -17,6 +17,9 @@ const Cart = () => {
     style: 'currency',
     currency: 'ARS',
   });
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, [cartItems]);
   return (
     <Helmet title={"Cart"}>
       <CommonSection title={'Carrito de compras!!'} />
@@ -55,7 +58,7 @@ const Cart = () => {
               <div>
                 <h6 className='d-flex align-items-center justify-content-between'>Subtotal: <span className='fs-4 fw-bold'>{formattedTotal}</span></h6>
                 
-                <p className='fs-6 mt-2'>costos de envios podras calcular ....</p>
+               
                 <div>
                   
                   <button className='buy__btn w-100 mt-3'><Link to='/checkout'>Checkout</Link></button>

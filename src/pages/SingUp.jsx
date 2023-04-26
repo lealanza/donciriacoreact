@@ -1,4 +1,4 @@
-import React, {useState}from 'react'
+import React, {useState, useEffect}from 'react'
 import Helmet from '../components/Helmet/Helmet'
 import { Container, Row, Col, Form, FormGroup } from 'reactstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -65,6 +65,9 @@ const SingUp = () => {
     }
 
   }
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, [username]);
 
   return (
     <Helmet title='Login'>

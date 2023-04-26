@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/Ui/CommonSection'
 import { Container, Row, Col} from 'reactstrap'
@@ -30,7 +30,9 @@ const Shop = () => {
         : products; 
     setProductsData(sortedProducts);
   };
-  
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, [productsData]);
 
   const handleSearch = (e) => {
     const searchTern = e.target.value

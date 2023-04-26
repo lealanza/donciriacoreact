@@ -57,6 +57,11 @@ const ProducstDetails = () => {
     setStockProducts(stockProducts - 1); 
     toast.success('Producto agregado');
   };
+  const formattedTotal = product.price.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  });
+
   
 
 return (
@@ -82,7 +87,7 @@ return (
                 </span>
               </div>
               <div>
-                <p className='product__price'>{price}</p>
+                <p className='product__price'>{formattedTotal}</p>
                 <p>Categoria: {category}</p>
                 <p>Cantidad: {stockProducts}</p>
                 <span className='mt-4'>{shortDesc}</span>
@@ -180,10 +185,10 @@ return (
                     <div className="review__form">
                       <h4>Deja tu experiencia</h4>
                       <form action="" onSubmit={handleSubmit}>
-                        <div className="form__groups">
+                        <div className="form__group">
                           <input type="text" placeholder='Ingrese su Nombre' ref={userReview} required />
                         </div>
-                        <div className="form__groups d-flex aling-items-center gap-2 rating__group">
+                        <div className="form__group d-flex aling-items-center gap-2 rating__group">
                           <motion.span whileTap={{ scale: 1.05 }} onClick={() => setRating(1)}>1<i class="ri-star-fill"></i></motion.span>
                           <motion.span whileTap={{ scale: 1.05 }} onClick={() => setRating(2)}>2<i class="ri-star-fill"></i></motion.span>
                           <motion.span whileTap={{ scale: 1.05 }} onClick={() => setRating(3)}>3<i class="ri-star-fill"></i></motion.span>
@@ -191,7 +196,7 @@ return (
                           <motion.span whileTap={{ scale: 1.05 }} onClick={() => setRating(5)}>5<i class="ri-star-fill"></i></motion.span>
                         </div>
                         <div className="form__group">
-                          <textarea rows={3} type="text" placeholder='Ingrese su review' ref={msgReview} required />
+                          <textarea rows={6} type="text" placeholder='Ingrese su review' ref={msgReview} required />
                         </div>
                         <button className='buy__btn text-white'>Enviar</button>
                       </form>
