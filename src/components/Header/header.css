@@ -18,7 +18,6 @@
     line-height: 70px;
 }
 .logo img{
-    
     width: 7rem;
     filter: drop-shadow( 5px 5px 5px #000000 );
 }
@@ -160,8 +159,12 @@
         font-size: 1.5rem;
     }
     .logo{
+      
         width: 3rem;
         
+    }
+    .logo img{
+        margin-left: 3rem;
     }
     .cart__icon i, 
     .fav__icon i{
