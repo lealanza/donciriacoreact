@@ -9,7 +9,7 @@ import ProductDetails from '../pages/ProducstDetails'
 import SingUp from '../pages/SingUp'
 import Error from '../pages/Error'
 import ProtectedRoutes from './ProtectedRoutes'
-
+import Profile from '../pages/Profile'
 
 
 const Routers = () => {
@@ -30,6 +30,12 @@ const Routers = () => {
         />
         <Route path='login' element={<Login/>}/>
         <Route path='singUp' element={<SingUp/>}/>
+        <Route path='profile' element={
+            <ProtectedRoutes>
+            <Profile/>
+            </ProtectedRoutes>
+          }/>
+
        <Route path='*' element={<Error/>}/>
     </Routes>
   )

@@ -38,4 +38,7 @@ color: white !important;
 .auth__form input[type='file']{
     cursor: pointer;
     color: white;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
 }

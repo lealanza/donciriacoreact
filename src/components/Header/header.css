@@ -72,10 +72,11 @@
     cursor: pointer;
 }
 .nav__icons .profile img{
-    max-width: 30px;
-    max-height: 30px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     border-radius: 50%;
+    object-fit: contain;
 }
 .nav__icons .profile{
     position: relative;

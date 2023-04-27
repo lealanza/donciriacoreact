@@ -46,6 +46,7 @@ const Header = () => {
         })
     }
     const logout = () =>{
+
         signOut(auth).then(()=>{
             toast.success('Cerro sesion')
             navigate("/home")
@@ -64,7 +65,7 @@ const Header = () => {
     }
 
     const toglleProfileActions = ()=>{profileActionsRef.current.classList.toggle('show__profile-actions')}
-
+    const navigateToProfile = () => {navigate( '/profile')}
 
     return (
         <header className="header" ref={headerRef}>
@@ -110,8 +111,12 @@ const Header = () => {
                                 className="profile__actions" 
                                 ref={profileActionsRef} 
                                 onClick={toglleProfileActions}>
+                                    
                                     {currentUser ?( 
-                                        <span onClick={logout}>Logout</span>
+                                        <div className='d-flex align-items-center justify-content-center flex-column'>
+                                        <span onClick={navigateToProfile}>Perfil</span>
+                                        <span onClick={logout}>Logout</span> 
+                                        </div>               
                                     ):(
                                         <div className='d-flex align-items-center justify-content-center flex-column'>
                                             <Link to='/singup' >Singup</Link>
