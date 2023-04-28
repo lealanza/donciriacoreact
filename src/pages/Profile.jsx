@@ -2,38 +2,57 @@ import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Helmet from '../components/Helmet/Helmet';
 import { signOut } from 'firebase/auth'
-import { auth } from '../firabase.config'
+import { auth, db } from '../firabase.config'
+import { collection, query, where  } from "firebase/firestore";
 import { toast } from 'react-toastify'
 import '../styles/profile.css'
-
+ 
 function Profile() {
   const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false)
+
+  const [userOrders, setUserOrders] = useState(null);
+  const newOrderRef = collection(db, 'orders')
+  const q = query(newOrderRef, where(newOrderRef, "==", "ac8eAeyzuhOGD7neHfxQtGtrkcv1"));
   useEffect(() => {
-    // Detectar cambios en el estado de autenticación
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // El usuario está autenticado
         console.log(user);
-        setUser(user); // Guardar el objeto user en el estado local
+        setUser(user);
       } else {
-        // El usuario no está autenticado
-        console.log('No autenticado');
+        console.log("No autenticado");
         setUser(null);
       }
     });
-    
-
-    // Desuscribirse del listener cuando el componente se desmonte
     return () => unsubscribe();
   }, []);
-  const logout = () =>{
 
-    signOut(auth).then(()=>{
-        toast.success('Cerro sesion')
-    }).catch(err=>{
-        toast.err(err.message)
-    })
-}
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Cerro sesion");
+      })
+      .catch((err) => {
+        toast.err(err.message);
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      const userOrdersQuery = newOrderRef.where("id", "==", user.uid);
+
+      const unsubscribe = userOrdersQuery.onSnapshot((querySnapshot) => {
+        const orders = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUserOrders(orders);
+      });
+
+      return () => unsubscribe();
+    }
+  }, [user]);
+  console.log(q)
   return (
     <Helmet title='Perfil'>
       <section>
@@ -43,18 +62,18 @@ function Profile() {
               {user ? (
                 <div>
                   <h2>Perfil de usuario</h2>
-                <div className='profile__wrapper'>
-                  
-                  <div className='profile__content'>
-                    <img src={user.photoURL} alt="Foto de perfil" className='img__profile' />
-                    <h3 className='profile__username'>{user.displayName}</h3>
-                  </div>
-                  <div>
-                    <button onClick={logout} className='buy__btn text-white'>Logout</button>
+                  <div className='profile__wrapper'>
+                    <div className='profile__content'>
+                      <img src={user.photoURL} alt="Foto de perfil" className='img__profile' />
+                      <h3 className='profile__username'>{user.displayName}</h3>
+
+                    </div>
+                    <div>
+                      <button onClick={logout} className='buy__btn text-white'>Logout</button>
+                    </div>
                   </div>
                 </div>
-                </div>
-                
+
               ) : (
                 <p>No estás autenticado</p>
               )}
