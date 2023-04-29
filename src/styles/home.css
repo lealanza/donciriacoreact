@@ -14,7 +14,7 @@
     margin: 20px 0px;
     max-width:600px;
     /**filter: drop-shadow( 5px 5px 5px var(--color-primary) );**/
-    text-shadow:3px 3px 7px var(--color-primary);
+    text-shadow:1px 1px 3px var(--color-primary);
 }
 
 .hero__section p{
