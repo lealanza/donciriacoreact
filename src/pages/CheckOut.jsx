@@ -22,6 +22,7 @@ const CheckOut = () => {
 
   const total = useSelector((state) => state.cart.totalQuantity);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const isBuyButtonDisabled = totalAmount === 0;
   const formattedTotal = totalAmount.toLocaleString('es-AR', {
     style: 'currency',
     currency: 'ARS',
@@ -89,6 +90,7 @@ const CheckOut = () => {
             <Row>
               <Col lg="8">
                 <h6 className="mb-4 mt-5 fw-bold">Información de facturación</h6>
+                {isBuyButtonDisabled && (<h4 className='text-danger mb-4 mt-4 fs-1'>Por favor, debe agregar un producto para poder realizar el pedido</h4>)}
                 <Form className="billing__form" onSubmit={handleSubmit}>
                   <FormGroup className="form__group">
                     <input
@@ -153,7 +155,7 @@ const CheckOut = () => {
                       onChange={handleInputChange}
                     />
                   </FormGroup>
-                  <button className="buy__btn text-white" type="submit">
+                  <button className="buy__btn text-white" type="submit" disabled={isBuyButtonDisabled}>
                     Haz tu compra
                   </button>
                 </Form>
