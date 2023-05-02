@@ -16,14 +16,25 @@ const SingUp = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [formError, setFormError] = useState('');
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const singup = async (e)=>{
     e.preventDefault()
     setLoading(true)
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setFormError('El correo electrónico es inválido');
+      setLoading(false);
+      return;
+    } else if (password.length < 6) {
+      setFormError('La contraseña debe tener al menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+    
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth, 
@@ -51,23 +62,32 @@ const SingUp = () => {
 
           });
         }
-        )
-      setLoading(false)
-      
-
+        );
       
       toast.success('Cuenta creada correctamente')
       navigate('/login')
     } catch (error) {
-      setLoading(false)
-      toast.error('Ocurrio un error, vuelve a intentarlo')
-      
+      setFormError('Ocurrio un error, vuelve a intentarlo');
     }
 
+    setLoading(false);
   }
-  useEffect(()=>{
+
+  useEffect(() => {
     window.scrollTo(0,0);
   }, [username]);
+
+  const handlePasswordChange = (event) => {
+    const { value } = event.target;
+
+    if (value.length < 6) {
+      setFormError('La contraseña debe tener al menos 6 caracteres');
+    } else {
+      setFormError('');
+    }
+
+    setPassword(value);
+  };
 
   return (
     <Helmet title='Login'>
@@ -93,11 +113,21 @@ const SingUp = () => {
                   value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </FormGroup>
                 <FormGroup className='form__group'>
-                  <input type="password" placeholder='Ingrese su password'
-                   value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                  <input
+                    type="password"
+                    placeholder='Ingrese su password'
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
                 </FormGroup>
+                {formError &&
+                  <div style={{ color: 'red' }}>
+                    {formError}
+                  </div>
+                }
                 <FormGroup>
-                 <input
+                  <label className='text-white mt-4'>Ingrese su avatar 200 x 200</label>
+                  <input
                   type="file"
                   onChange={(e)=>setFile(e.target.files[0])}
                 />
@@ -114,9 +144,7 @@ const SingUp = () => {
         </Container>
       </section>
     </Helmet>
-  )
-
-
+  );
 }
 
-export default SingUp
+export default SingUp;

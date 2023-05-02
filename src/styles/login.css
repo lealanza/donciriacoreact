@@ -37,8 +37,7 @@ color: white !important;
 
 .auth__form input[type='file']{
     cursor: pointer;
+    text-align: center;
     color: white;
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
+    max-width: 380px;
 }
