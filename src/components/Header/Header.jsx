@@ -19,10 +19,10 @@ const nav__links = [
     }, {
         path: 'shop',
         display: 'Tienda'
-    }, {
+    },/* {
         path: 'cart',
         display: 'Carrito'
-    },
+    },*/
 
 ]
 
@@ -75,11 +75,14 @@ const Header = () => {
                         <Link className="logo" to="/home">
                             <img src={logo} alt="logo" />
                         </Link>
+                        
+
+                        <div className="nav__icons">
                         <div className="navigation" ref={menuRef} onClick={menuToggle}>
                             <ul className="menu">
                                 {
                                     nav__links.map((item, index) =>
-                                        <li className="nav__item" key={index}>
+                                        <li className="nav__item fs-6" key={index}>
                                             <NavLink to={item.path}
                                                 className={(navClass) =>
                                                     navClass.isActive ? "nav__active" : ""}
@@ -89,9 +92,6 @@ const Header = () => {
                                 }
                             </ul>
                         </div>
-
-                        <div className="nav__icons">
-                            
                             <span className="cart__icon" onClick={navigateToCart}>
                                 <i class="ri-shopping-cart-line"></i>
                                 <span className="badge">{totalQuantity}</span>

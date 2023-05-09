@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
+import { cartActions } from '../redux/slices/cartSlice';
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/Ui/CommonSection';
 import '../styles/checkout.css';
 import { toast } from 'react-toastify';
 import { db, auth } from '../firabase.config'; // Agrega el servicio de autenticación de Firebase Auth
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc } from 'firebase/firestore';
 
 const CheckOut = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,8 @@ const CheckOut = () => {
     postalCode: '',
     address: '',
   });
-
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems)
   const total = useSelector((state) => state.cart.totalQuantity);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const isBuyButtonDisabled = totalAmount === 0;
@@ -27,7 +29,10 @@ const CheckOut = () => {
     style: 'currency',
     currency: 'ARS',
   });
-
+  const generateOrderId = () => {
+    const newOrderRef = doc(collection(db, 'orders'));
+    return newOrderRef.id;
+  };
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -43,7 +48,9 @@ const CheckOut = () => {
         const currentUser = auth.currentUser; // Obtener el usuario actual
 
         const newOrderRef = await addDoc(collection(db, 'orders'), {
-          userId: currentUser.uid, // Agregar uid del usuario a la orden
+          date: new Date(),
+          orderId: generateOrderId(),
+          uId: currentUser.uid, // Agregar uid del usuario a la orden
           email: currentUser.email, // Agregar email del usuario a la orden
           name: formData.name,
           phone: formData.phone,
@@ -51,8 +58,7 @@ const CheckOut = () => {
           city: formData.city,
           postalCode: formData.postalCode,
           address: formData.address,
-          totalAmount: totalAmount,
-          totalQuantity: total,
+          cartItems,
         });
         toast.success(
           'Gracias por tu compra, en breve sera despachada a tu domicilio!'
@@ -60,6 +66,7 @@ const CheckOut = () => {
         setTimeout(() => {
           navigate('/home');
         }, 3000);
+        dispatch(cartActions.clearCart());
       } catch (error) {
         console.error('Error adding document: ', error);
         toast.error('Ha ocurrido un error al procesar su pedido.');

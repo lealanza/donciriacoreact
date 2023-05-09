@@ -6,17 +6,24 @@ import { Container, Row, Col } from 'reactstrap'
 import { motion } from 'framer-motion'
 import { cartActions } from '../redux/slices/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 const Cart = () => {
-
+  const navigate = useNavigate()
   const cartItems = useSelector((state) => state.cart.cartItems)
   const totalAmount = useSelector ((state)=> state.cart.totalAmount)
   const formattedTotal = totalAmount.toLocaleString('es-AR', {
     style: 'currency',
     currency: 'ARS',
   });
+  
+
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate('/checkout');
+    }
+  };
   useEffect(()=>{
     window.scrollTo(0,0);
   }, [cartItems]);
@@ -61,8 +68,8 @@ const Cart = () => {
                
                 <div>
                   
-                  <button className='buy__btn w-100 mt-3'><Link to='/checkout'>Checkout</Link></button>
-                  <button className='buy__btn w-100 mt-3'><Link to='/shop'>Continuar comprando</Link></button>
+                <button className='buy__btn w-100 mt-3 text-white' disabled={cartItems.length === 0} onClick={handleCheckout}>Checkout</button>
+                <button className='buy__btn w-100 mt-3'><Link to='/shop'>Continuar comprando</Link></button>
                 </div>
               </div>
             </Col>
