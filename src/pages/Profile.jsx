@@ -13,12 +13,13 @@ import {
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import '../styles/profile.css';
+import { ClassNames } from '@emotion/react';
 
-function Profile() {
+function Profile({ cartItems }) {
   const [user, setUser] = useState(null);
   const [userOrders, setUserOrders] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   const fetchUserOrders = async (uid) => {
     const ordersRef = collection(db, 'orders');
@@ -63,110 +64,87 @@ function Profile() {
   };
 
   return (
-    <Helmet title='Perfil'>
-      <section>
-        <Container>
-          <Row>
-            <Col lg='12'>
-              {user ? (
-                <div>
-                  <h2>Perfil de usuario</h2>
-                  <div className='profile__wrapper'>
-                    <div className='profile__content'>
-                      <img
-                        src={user.photoURL}
-                        alt='Foto de perfil'
-                        className='img__profile'
-                      />
-                      <h3 className='profile__username'>{user.displayName}</h3>
-                    </div>
-                    <div>
-                      <button
-                        onClick={logout}
-                        className='buy__btn text-white'
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </div>
-                  <h4>Órdenes:</h4>
-                  <select
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    value={selectedDate}
-                  >
-                    <option value=''>Seleccione una fecha</option>
-                    {userOrders.map((order) => (
-                      <option
-                        key={order.uid}
-                        value={order.date.seconds.toString()}
-                      >
-                        {new Date(
-                          order.date.seconds * 1000
-                        ).toLocaleDateString()}{' '}
-                        -{' '}
-                        {new Date(
-                          order.date.seconds * 1000
-                        ).toLocaleTimeString()}
-                      </option>
-                    ))}
-                  </select>
-                  <ul>
-                    {userOrders
-                      .filter(
-                        (order) =>
-                          selectedDate &&
-                          order.date.seconds === parseInt(selectedDate)
-                      )
-                      .map((order) => (
-                        <li key={order.uid}>
-                          Fecha del pedido:{' '}
-                          {new Date(
-                            order.date.seconds * 1000
-                          ).toLocaleDateString()}{' '}
-                          -{' '}
-                          {new Date(
-                            order.date.seconds * 1000
-                          ).toLocaleTimeString()}{' '}
-                          <button onClick={() => setSelectedOrder(order.orderId)}>
-                            Ver detalles
-                          </button>
-                        </li>
-                      ))}
-                  </ul>
-                  {selectedOrder && (
-                    <div>
-                      <h3>Pedido seleccionado:</h3>
-                      <p>
-                        Fecha:{' '}
-                        {new Date(
-                          selectedOrder.date.seconds * 1000
-                        ).toString()}
-                      </p>
-                      <p>ID del pedido: {selectedOrder.orderId}</p>
-                      <ul>
-                        {selectedOrder.items.map((item) => (
-                          <li key={item.id}>
-                            {item.name} - Cantidad: {item.quantity} - Precio: $
-                            {item.price}
-                          </li>
-                        ))}
-                      </ul>
-                      <button onClick={() => deleteOrder(selectedOrder)}>
-                        Borrar pedido
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p>No estás autenticado</p>
+    <Container>
+      <Helmet title="Perfil" />
+      {user ? (
+        <>
+          <h2>Perfil de usuario</h2>
+          <p>Foto de perfil</p>
+          <p>{user.displayName}</p>
+          <button className="buy__btn text-white" onClick={() => logout()}>
+            Logout
+          </button>
+          <br />
+          <br />
+          <h4>Órdenes:</h4>
+          <ul>
+            {userOrders.map((order) => (
+              <li key={order.orderId}>
+                {order.orderId} -{' '}
+                {new Date(order.date.seconds * 1000).toLocaleDateString()} -{' '}
+                {new Date(order.date.seconds * 1000).toLocaleTimeString()}
+                <button
+                  className="buy__btn text-white"
+                  onClick={() => {
+                    setSelectedOrder(order);
+                    setShowDetails(true);
+                  }}
+                >
+                  Ver detalles
+                </button>
+                {showDetails && (
+  <div>
+    <h5>{cartItems[0].name}</h5>
+    <p>{cartItems[0].description}</p>
+    <p>Precio: {cartItems[0].price}</p>
+    <button>Comprar</button>
+    <button
+      className="buy__btn text-white"
+      onClick={() => setShowDetails(false)}
+    >
+      Ocultar detalles
+    </button>
+  </div>
+)}
+              </li>
+            ))}
+          </ul>
+          {selectedOrder && (
+            <>
+              <h4>Pedido seleccionado:</h4>
+              <p>
+                Fecha:{' '}
+                {new Date(
+                  selectedOrder.date.seconds * 1000
+                ).toLocaleDateString()}{' '}
+                {new Date(
+                  selectedOrder.date.seconds * 1000
+                ).toLocaleTimeString()}
+              </p>
+              {selectedOrder.items?.length > 0 && (
+                <ul>
+                  {selectedOrder.items.map((item) => (
+                    <li key={item.name}>
+                      {item.name} - Cantidad: {item.quantity} - Precio: $
+                      {item.price.toFixed(2)}
+                    </li>
+                  ))}
+                </ul>
               )}
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </Helmet>
+              <button
+                className="buy__btn text-white"
+                onClick={() => deleteOrder(selectedOrder)}
+              >
+                Borrar pedido
+              </button>
+            </>
+          )}
+        </>
+      ) : (
+        <p>No estás autenticado</p>
+      )}
+    </Container>
   );
 }
 
 export default Profile;
-
