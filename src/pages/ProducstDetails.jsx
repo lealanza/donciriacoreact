@@ -25,11 +25,11 @@ const ProducstDetails = () => {
   const relatedProducts = products.filter((item) => item.category === category)
   const handleSubmit = (e) => {
     e.preventDefault()
-    const reviewUserName = userReview.current.value
-    const reviewUserText = msgReview.current.value
+    /*const reviewUserName = userReview.current.value
+    const reviewUserText = msgReview.current.value*/
     const reviewObj = {
-      userName: reviewUserName,
-      text: reviewUserText,
+      /*userName: reviewUserName,
+      text: reviewUserText,*/
       rating,
     };
     toast.success('Gracias por tu review!')

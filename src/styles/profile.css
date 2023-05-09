@@ -1,7 +1,10 @@
 .profile__wrapper{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
+
 .profile__content{
     display: flex;
     align-items: center;
@@ -16,3 +19,137 @@
     object-fit: contain;
     border-radius: 50%;
 }
+.filter__widget{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter__widget select{
+    padding: .5rem 20px;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+    background: var(--color-primary);
+    color: white;
+    gap: 10px;
+}
+.filter__widget select:focus{
+    outline: none !important;
+}
+.filter__widget select option{
+    font-size: .9rem;
+    gap: 20px;
+}
+.li__details{
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    font-size: 1.5rem;
+    flex-direction: column;
+}
+
+.btn__details{
+    background: var(--color-primary);
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: white !important;
+    border: 1px solid white;
+    
+}
+
+.select__order{
+    padding: 20px;
+    background: white;
+    color: var(--color-primary);
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.select__order h3{
+    color: var(--color-primary);
+}
+.select__order p{
+    color: black;
+}
+.select__order img{
+    margin: 0 auto;
+    width: 30%;
+}
+.ul_details li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.ul_details li p{
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    
+}
+.ul_details li p span{
+    text-decoration: none;
+}
+
+.select__order button{
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    h2{
+        text-align: center;
+    }
+    .profile__wrapper{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    .profile__content {
+        display: flex;
+        align-items: center;
+        text-align: center;
+       margin-left: 0;
+    }
+    .img__profile{
+        display: none;
+    }
+    .profile__content button{
+        margin-bottom: 20px;
+    }
+    .filter__widget {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+  
+    .filter__widget select {
+      font-size: 14px;
+    }
+    .filter__widget ul{
+       padding: 0;
+    }
+  
+    .filter__widget li {
+        display: flex !important;
+        flex-direction: column;
+      font-size: 14px;
+    }
+  
+    .btn__details {
+      font-size: 12px;
+      margin-bottom: 5px;
+      width: 100%;
+    }
+    .ul_details img{
+        max-width: 50%;
+        border-radius: 10px;
+    }
+  }
