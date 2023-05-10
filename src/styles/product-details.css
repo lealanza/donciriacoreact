@@ -104,6 +104,11 @@
     margin-top: 30px;
     margin-bottom: 10px;
 }
+.shop__btn{
+    margin-left: 10px;
+    font-size: 1.2rem;
+    font-weight: 900 !important;
+}
 
 @media only screen and (max-width:768px) {
     .rating__group{

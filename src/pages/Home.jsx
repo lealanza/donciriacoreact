@@ -11,6 +11,7 @@ import ProductsList from '../components/Ui/ProductsList'
 import products from '../data/data'
 import { useEffect, useState } from 'react'
 import Clock from '../components/Ui/Clock'
+import ContadorVisitas from '../components/Ui/ContadorVisitas'
 
 const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([])
@@ -78,16 +79,22 @@ const Home = () => {
                 <h4 className='text-white fs-6 mb-2'>Ofertas de tiempo limitado</h4>
                 <h3 className='text-white fs-5 mb-3'>No te duermas!</h3>
               </div>
-              <Clock />
+              <Clock className='mb-3'/>
+              <ContadorVisitas className='mb-5 text-white '/>
               <motion.button
                 whileTap={{ scale: 1.2 }}
                 className="buy__btn store__btn">
                 <Link to='/shop'>Visitar Tienda</Link>
               </motion.button>
             </Col>
-            <Col lg='6' md='6' className='text-end counter__img'>
-              <img src={timerImg} alt="" />
+            <Col lg='2' md='8'>
+            
             </Col>
+            <Col lg='4' md='6' className='text-end counter__img'>
+            <img src={timerImg} alt="" />
+            </Col>
+            
+            
           </Row>
         </Container>
       </section>

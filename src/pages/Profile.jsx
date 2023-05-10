@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Helmet from '../components/Helmet/Helmet';
-import { auth, db } from '../firabase.config';
+import { auth, db } from '../firebase.config';
 import {
   collection,
   query,
