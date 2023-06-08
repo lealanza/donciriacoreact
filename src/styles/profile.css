@@ -56,7 +56,7 @@
     font-size: 1.2rem;
     color: white !important;
     border: 1px solid white;
-    max-width: 250px;
+    width: 250px;
 }
 .title-details-ped {
     max-width: 300px;
