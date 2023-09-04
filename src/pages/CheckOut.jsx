@@ -7,7 +7,7 @@ import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/Ui/CommonSection';
 import '../styles/checkout.css';
 import { toast } from 'react-toastify';
-import { db, auth } from '../firabase.config'; // Agrega el servicio de autenticación de Firebase Auth
+import { db, auth } from '../firebase.config'; 
 import { addDoc, collection, doc } from 'firebase/firestore';
 
 const CheckOut = () => {
@@ -46,7 +46,15 @@ const CheckOut = () => {
       try {
         // Agregar el pedido a la colección "orders" en Firestore
         const currentUser = auth.currentUser; // Obtener el usuario actual
-
+        const cartItemsData = cartItems.map(item => {
+          return {
+            imgUrl: item.imgUrl,
+            price: item.price,
+            productName: item.productName,
+            quantity: item.quantity,
+            totalPrice: item.price * item.quantity
+          }
+        });
         const newOrderRef = await addDoc(collection(db, 'orders'), {
           date: new Date(),
           orderId: generateOrderId(),
@@ -58,7 +66,7 @@ const CheckOut = () => {
           city: formData.city,
           postalCode: formData.postalCode,
           address: formData.address,
-          cartItems,
+          cartItems: cartItemsData,
         });
         toast.success(
           'Gracias por tu compra, en breve sera despachada a tu domicilio!'

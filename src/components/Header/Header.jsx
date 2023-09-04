@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
 import useAuth from '../../custom-hooks/useAuth'
 import { signOut } from 'firebase/auth'
-import { auth } from '../../firabase.config'
+import { auth } from '../../firebase.config'
 import { toast } from 'react-toastify'
 
 const nav__links = [
