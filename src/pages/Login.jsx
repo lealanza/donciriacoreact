@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, FormGroup } from 'reactstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firabase.config'
+import { auth } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinners from '../components/Ui/Spinners'
 

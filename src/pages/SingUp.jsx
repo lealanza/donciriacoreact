@@ -6,9 +6,9 @@ import '../styles/login.css'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL}  from 'firebase/storage'
 import { setDoc, doc } from 'firebase/firestore'
-import { auth } from '../firabase.config';
-import { storage } from '../firabase.config'
-import { db } from '../firabase.config'
+import { auth } from '../firebase.config';
+import { storage } from '../firebase.config'
+import { db } from '../firebase.config'
 import { toast } from 'react-toastify';
 import Spinners from '../components/Ui/Spinners'
 

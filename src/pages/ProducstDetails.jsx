@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Container, Row, Col } from 'reactstrap'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import products from '../data/data'
 import Helmet from '../components/Helmet/Helmet'
 import CommonSection from '../components/Ui/CommonSection'
@@ -25,11 +25,11 @@ const ProducstDetails = () => {
   const relatedProducts = products.filter((item) => item.category === category)
   const handleSubmit = (e) => {
     e.preventDefault()
-    /*const reviewUserName = userReview.current.value
-    const reviewUserText = msgReview.current.value*/
+    const reviewUserName = userReview.current.value
+    const reviewUserText = msgReview.current.value
     const reviewObj = {
-      /*userName: reviewUserName,
-      text: reviewUserText,*/
+      userName: reviewUserName,
+      text: reviewUserText,
       rating,
     };
     toast.success('Gracias por tu review!')
@@ -98,7 +98,9 @@ const ProducstDetails = () => {
                   </span>
                   :
                   <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white' onClick={addToCart}>Comprar</motion.button>
+                  
                 }
+                 <motion.button whileTap={{ scale: 1.05 }} className='buy__btn text-white shop__btn'><Link to='/shop'>Tienda</Link></motion.button>
               </div>
             </Col>
           </Row>

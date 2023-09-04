@@ -7,7 +7,7 @@ import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/Ui/CommonSection';
 import '../styles/checkout.css';
 import { toast } from 'react-toastify';
-import { db, auth } from '../firabase.config'; // Agrega el servicio de autenticación de Firebase Auth
+import { db, auth } from '../firebase.config'; 
 import { addDoc, collection, doc } from 'firebase/firestore';
 
 const CheckOut = () => {
