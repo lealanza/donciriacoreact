@@ -33,8 +33,8 @@ const Header = () => {
     const menuRef = useRef(null)
     const totalQuantity = useSelector(state=>state.cart.totalQuantity)
     const profileActionsRef = useRef(null)
-
-    const {currentUser} = useAuth()
+    const {currentUser} = useSelector(state => state.user);
+    console.log(currentUser)
     const stickyHeaderFunc = () => {
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {

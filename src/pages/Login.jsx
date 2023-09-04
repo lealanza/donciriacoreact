@@ -7,19 +7,28 @@ import { toast } from 'react-toastify';
 import Spinners from '../components/Ui/Spinners';
 import axios from 'axios'; // Importa Axios
 import { loginUser } from '../axios/axios-user';
+import {useDispatch, useSelector} from 'react-redux';
+import { setCurrentUser } from '../redux/slices/userSlice';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
   const singIn = async (e) => {
     e.preventDefault();
       const response = await loginUser(
         email,
         password,
       );
+      if(response){
+        dispatch(
+          setCurrentUser({
+              ...response.user,
+              token: response.token,
+        }))
+      }
         console.log(response.user)
         toast.success(response.message || 'Iniciando sesión con éxito');
         navigate('/');

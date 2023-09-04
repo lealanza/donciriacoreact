@@ -1,18 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  users: [],
+const INITIAL_STATE = {
+  currentUser: null,
+  hiddenMenu: true,
 };
 
 const userSlice = createSlice({
-  name: 'users',
-  initialState,
+  name: 'user',
+  initialState: INITIAL_STATE,
   reducers: {
-    setUsers: (state, action) => {
-      state.users = action.payload;
+    setCurrentUser: (state, action) => {
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+    },
+    setVerified: state => {
+      if (state.currentUser) {
+        state.currentUser.verified = true;
+      }
+    },
+    toggleMenuHidden: state => {
+      return {
+        ...state,
+        hiddenMenu: !state.hiddenMenu,
+      };
     },
   },
 });
 
-export const userActions = userSlice.actions;
+export const { setCurrentUser, setVerified, toggleMenuHidden } =
+  userSlice.actions;
+
 export default userSlice.reducer;
