@@ -1,73 +1,81 @@
-import React, { useState, useEffect } from 'react'
-import Helmet from '../components/Helmet/Helmet'
-import { Container, Row, Col, Form, FormGroup } from 'reactstrap'
-import { Link, useNavigate } from 'react-router-dom'
-import '../styles/login.css'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase.config'
-import { toast } from 'react-toastify'
-import Spinners from '../components/Ui/Spinners'
-
+import React, { useState, useEffect } from 'react';
+import Helmet from '../components/Helmet/Helmet';
+import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/login.css';
+import { toast } from 'react-toastify';
+import Spinners from '../components/Ui/Spinners';
+import axios from 'axios'; // Importa Axios
+import { loginUser } from '../axios/axios-user';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const singIn = async (e)=>{
-    e.preventDefault()
-    setLoading(true)
-    try {
-      const userCredential= await signInWithEmailAndPassword(auth, email, password)
-      const user = userCredential.user
-      console.log(user)
-      setLoading(false)
-      toast.success('Iniciando sesión con éxito')
-      navigate('/checkOut')
-    } catch (error) {
-      setLoading(false)
-      toast.error(error.message)
-    }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const singIn = async (e) => {
+    e.preventDefault();
+      const response = await loginUser(
+        email,
+        password,
+      );
+        console.log(response.user)
+        toast.success(response.message || 'Iniciando sesión con éxito');
+        navigate('/');
+      
+    } 
 
 
-  }
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  }, [email]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Helmet title='Login'>
       <section>
         <Container>
           <Row>
-            {
-              loading ? 
-              (
-                <Col lg='12' className='text-center'><h3 className='fw-bold'><Spinners/></h3></Col>
-              ):(
+            {loading ? (
+              <Col lg='12' className='text-center'>
+                <h3 className='fw-bold'>
+                  <Spinners />
+                </h3>
+              </Col>
+            ) : (
               <Col lg='6' className='m-auto text-center'>
-              <h3 className='mb-4 fw-bold'>Login</h3>
-               <Form className='auth__form' onSubmit={singIn}>
-                 <FormGroup className='form__group'>
-                   <input type="email" placeholder='Ingrese su Email'
-                   value={email} onChange={(e)=>setEmail(e.target.value)} />
-                 </FormGroup>
-                 <FormGroup className='form__group'>
-                   <input type="password" placeholder='Ingrese su password'
-                    value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                 </FormGroup>
-                <button type='submit' className='buy__btn auth__btn'>Entrar</button>
-                <p>No tienes una cuenta? <Link to='/singup'>Create una cuenta</Link> </p>
-               </Form>
-             </Col>
-             )
-            }
-            
+                <h3 className='mb-4 fw-bold'>Login</h3>
+                <Form className='auth__form' onSubmit={singIn}>
+                  <FormGroup className='form__group'>
+                    <input
+                      type='email'
+                      placeholder='Ingrese su Email'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup className='form__group'>
+                    <input
+                      type='password'
+                      placeholder='Ingrese su password'
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
+                  <button type='submit' className='buy__btn auth__btn'>
+                    Entrar
+                  </button>
+                  <p>
+                    No tienes una cuenta? <Link to='/signup'>Crea una cuenta</Link>{' '}
+                  </p>
+                </Form>
+              </Col>
+            )}
           </Row>
         </Container>
       </section>
     </Helmet>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
