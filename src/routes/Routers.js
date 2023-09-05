@@ -23,17 +23,13 @@ const Routers = () => {
         <Route 
           path='checkOut' 
           element={
-            <ProtectedRoutes>
             <CheckOut/>
-            </ProtectedRoutes>
           }
         />
         <Route path='login' element={<Login/>}/>
         <Route path='singUp' element={<SingUp/>}/>
         <Route path='profile' element={
-            <ProtectedRoutes>
             <Profile/>
-            </ProtectedRoutes>
           }/>
 
        <Route path='*' element={<Error/>}/>

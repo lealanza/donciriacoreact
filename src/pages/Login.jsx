@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Helmet from '../components/Helmet/Helmet';
-import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
+import { Container, Row, Col, Form } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 import { toast } from 'react-toastify';
 import Spinners from '../components/Ui/Spinners';
-import axios from 'axios'; // Importa Axios
 import { loginUser } from '../axios/axios-user';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../redux/slices/userSlice';
-
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import { Button } from '@mui/material';
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -18,22 +19,22 @@ const Login = () => {
   const dispatch = useDispatch();
   const singIn = async (e) => {
     e.preventDefault();
-      const response = await loginUser(
-        email,
-        password,
-      );
-      if(response){
-        dispatch(
-          setCurrentUser({
-              ...response.user,
-              token: response.token,
+    const response = await loginUser(
+      email,
+      password,
+    );
+    if (response) {
+      dispatch(
+        setCurrentUser({
+          ...response.user,
+          token: response.token,
         }))
-      }
-        console.log(response.user)
-        toast.success(response.message || 'Iniciando sesión con éxito');
-        navigate('/');
-      
-    } 
+    }
+    console.log(response.user)
+    toast.success(response.message || 'Iniciando sesión con éxito');
+    navigate('/');
+
+  }
 
 
   useEffect(() => {
@@ -53,30 +54,45 @@ const Login = () => {
               </Col>
             ) : (
               <Col lg='6' className='m-auto text-center'>
-                <h3 className='mb-4 fw-bold'>Login</h3>
+                <h3 className='mb-4 fw-bold' style={{
+                  color:'rgba(0, 45, 109)'
+                }}>Login</h3>
                 <Form className='auth__form' onSubmit={singIn}>
-                  <FormGroup className='form__group'>
-                    <input
+                  
+                    <TextField label="Email" variant="outlined"
+                      style={{
+                        gap:'10px',
+                        
+                      }}
                       type='email'
                       placeholder='Ingrese su Email'
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                  </FormGroup>
-                  <FormGroup className='form__group'>
-                    <input
+                    <TextField label="Password" variant="outlined"
+                     style={{
+                      
+                    }}
                       type='password'
                       placeholder='Ingrese su password'
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                     />
-                  </FormGroup>
-                  <button type='submit' className='buy__btn auth__btn'>
+                    
+
+                  <Button variant='outlined' type='submit'>
                     Entrar
-                  </button>
-                  <p>
-                    No tienes una cuenta? <Link to='/signup'>Crea una cuenta</Link>{' '}
-                  </p>
+                  </Button >
+                   
+                  <p style={{color:'black',}}>
+                    No tienes una cuenta? </p>  
+                    <Link style={{
+                      fontSize:'20px',
+                      color:'#002d6dc9',
+                      marginBottom:20,
+                      marginTop:-20
+                    }} to='/signup'>Create una cuenta</Link>{' '}
+                  
                 </Form>
               </Col>
             )}

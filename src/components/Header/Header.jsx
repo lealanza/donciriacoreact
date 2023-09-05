@@ -5,12 +5,9 @@ import { Container, Row } from 'reactstrap'
 import logo from '../../LOGOS/logo.png'
 import user from '../../LOGOS/user.png'
 import { HiOutlineMenu } from 'react-icons/hi'
-import { motion } from 'framer-motion'
 import { useSelector } from 'react-redux'
-import useAuth from '../../custom-hooks/useAuth'
-import { signOut } from 'firebase/auth'
-import { auth } from '../../firebase.config'
 import { toast } from 'react-toastify'
+import { setCurrentUser } from '../../redux/slices/userSlice'
 
 const nav__links = [
     {
@@ -46,13 +43,9 @@ const Header = () => {
         })
     }
     const logout = () =>{
-
-        signOut(auth).then(()=>{
+            setCurrentUser(null)
             toast.success('Cerro sesion')
-            navigate("/home")
-        }).catch(err=>{
-            toast.err(err.message)
-        })
+            navigate("/")
     }
     useEffect(()=>{
         stickyHeaderFunc()
@@ -98,12 +91,9 @@ const Header = () => {
                             </span>
 
                             <div className='profile'>
-                                <motion.img
-                                 whileTap={{ scale: 1.2 }} 
-                                 src={currentUser ? currentUser.photoURL: user} 
-                                 alt="" 
-                                 onClick={toglleProfileActions} 
-                                 />
+                               <span onClick={toglleProfileActions} 
+                                    >{currentUser ? `${currentUser.userName}` : 'Usuario' }</span>
+                              
                                 <div 
                                 className="profile__actions" 
                                 ref={profileActionsRef} 
