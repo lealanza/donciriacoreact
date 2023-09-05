@@ -93,20 +93,18 @@ const Header = () => {
                             <div className='profile'>
                                <span onClick={toglleProfileActions} 
                                     >{currentUser ? `${currentUser.userName}` : 'Usuario' }</span>
-                              
                                 <div 
                                 className="profile__actions" 
                                 ref={profileActionsRef} 
                                 onClick={toglleProfileActions}>
-                                    
                                     {currentUser ?( 
-                                        <div className='d-flex align-items-center justify-content-center flex-column'>
+                                        <div className='d-flex align-items-center justify-content-center flex-column' >
                                         <span onClick={navigateToProfile}>Perfil</span>
                                         <span onClick={logout}>Logout</span> 
                                         </div>               
                                     ):(
                                         <div className='d-flex align-items-center justify-content-center flex-column'>
-                                            <Link to='/singup' >Singup</Link>
+                                            <Link to='/singup'>Singup</Link>
                                             <Link to='/login' >Login</Link>
                                         </div>
                                         )}
@@ -116,11 +114,8 @@ const Header = () => {
                                 <span onClick={menuToggle}>
                                     <HiOutlineMenu />
                                 </span>
-                            
                             </div>
                         </div>
-                        
-
                     </div>
                 </Row>
             </Container>

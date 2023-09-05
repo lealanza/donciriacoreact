@@ -85,14 +85,14 @@
 .profile__actions{
     position: absolute;
     top: 98%;
-    right: 0;
     width: 150px;
     z-index: 10;
     padding: 15px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: var(--card-bg-03);
+    background: #002d6d91;;
     line-height: 30px;
     display: none;
     cursor: pointer;
@@ -102,7 +102,15 @@
 .profile__actions a{
     margin: 5px;
     text-decoration: none;
+    color: white;
 }
+
+.profile__actions span{
+    margin: 5px;
+    text-decoration: none;
+    color: white;
+}
+
 
 .show__profile-actions{
     display: block;
