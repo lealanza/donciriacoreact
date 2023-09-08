@@ -6,8 +6,9 @@ import '../styles/login.css';
 import { toast } from 'react-toastify';
 import Spinners from '../components/Ui/Spinners';
 import { loginUser } from '../axios/axios-user';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../redux/slices/userSlice';
+import { Button, TextField } from '@mui/material';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,23 +18,30 @@ const Login = () => {
   const dispatch = useDispatch();
   const singIn = async (e) => {
     e.preventDefault();
+    try {
       const response = await loginUser(
         email,
         password,
       );
-      if(response){
+      console.log(response.user)
+      if (response) {
         dispatch(
           setCurrentUser({
-              ...response.user,
-              token: response.token,
-        }))
+            ...response.user,
+            token: response.token,
+          }))
       }
-        console.log(response.user)
-        toast.success(response.message || 'Iniciando sesión con éxito');
-        navigate('/');
-      
-    } 
+      const currentUser = response.token
+      console.log(currentUser)
+      toast.success(response.message || 'Iniciando sesión con éxito');
+      navigate('/');
+    } catch (error) {
+      toast.error('Error al iniciar sesión');
+      toast.error('Verifica Email y Contraseña');
 
+    }
+
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,28 +62,49 @@ const Login = () => {
               <Col lg='6' className='m-auto text-center'>
                 <h3 className='mb-4 fw-bold'>Login</h3>
                 <Form className='auth__form' onSubmit={singIn}>
-                  <FormGroup className='form__group'>
-                    <input
-                      type='email'
-                      placeholder='Ingrese su Email'
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </FormGroup>
-                  <FormGroup className='form__group'>
-                    <input
-                      type='password'
-                      placeholder='Ingrese su password'
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </FormGroup>
-                  <button type='submit' className='buy__btn auth__btn'>
+                  <TextField variant='outlined'
+                    label='Email'
+                    name='Email'
+                    id='Email'
+                    size='normal'
+                    fullWidth
+                    margin='normal'
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <TextField variant='outlined'
+                    label='Password'
+                    name='password'
+                    id='password'
+                    size='normal'
+                    fullWidth
+                    margin='normal'
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div style={{
+                    fontSize: '10px',
+                  }}>
+                    <p style={{ text: "center" }}>
+                      Has olvidado tu contraseña?
+                    </p><Link to='/resetPassword'>Recuperar contraseña</Link>
+                  </div>
+
+                  <Button variant='outlined' fullWidth size='large' color='primary' type='submit'>
                     Entrar
-                  </button>
-                  <p>
-                    No tienes una cuenta? <Link to='/signup'>Crea una cuenta</Link>{' '}
+                  </Button>
+                  <div style={{
+                    fontSize: '10px',
+                  }}>
+                  <p style={{ text: "center" }}>
+                    No tienes una cuenta?
                   </p>
+                  <Link to='/singUp'>Crea una cuenta</Link>
+                  </div>
+
                 </Form>
               </Col>
             )}

@@ -26,10 +26,16 @@ const userSlice = createSlice({
         hiddenMenu: !state.hiddenMenu,
       };
     },
+    setIsAuthenticated: (state, action) => {
+      return {
+        ...state,
+        isAuthenticated: action.payload,
+      };
+    },
   },
 });
 
-export const { setCurrentUser, setVerified, toggleMenuHidden } =
+export const { setCurrentUser, setVerified, toggleMenuHidden, setIsAuthenticated } =
   userSlice.actions;
 
 export default userSlice.reducer;

@@ -8,7 +8,7 @@ import { HiOutlineMenu } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { setCurrentUser } from '../../redux/slices/userSlice'
-
+import { useDispatch } from 'react-redux'
 const nav__links = [
     {
         path: 'home',
@@ -24,7 +24,7 @@ const nav__links = [
 ]
 
 const Header = () => {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate()
     const headerRef = useRef(null)
     const menuRef = useRef(null)
@@ -43,9 +43,10 @@ const Header = () => {
         })
     }
     const logout = () =>{
-            setCurrentUser(null)
-            toast.success('Cerro sesion')
-            navigate("/")
+        
+        dispatch(setCurrentUser(null));
+        toast.success("Hasta pronto!!!");
+        navigate("/");
     }
     useEffect(()=>{
         stickyHeaderFunc()

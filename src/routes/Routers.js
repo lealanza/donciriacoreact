@@ -10,6 +10,8 @@ import SingUp from '../pages/SingUp'
 import Error from '../pages/Error'
 import ProtectedRoutes from './ProtectedRoutes'
 import Profile from '../pages/Profile'
+import ResetPassword from '../pages/ResetPassword'
+import Verified from '../pages/Verified.jsx'
 
 
 const Routers = () => {
@@ -23,13 +25,20 @@ const Routers = () => {
         <Route 
           path='checkOut' 
           element={
+            <ProtectedRoutes>
             <CheckOut/>
+            </ProtectedRoutes>
           }
         />
         <Route path='login' element={<Login/>}/>
-        <Route path='singUp' element={<SingUp/>}/>
+        <Route path='resetPassword' element={<ResetPassword/>}/>
+        <Route path='singup' element={<SingUp/>}/>
+        <Route path='verified' element={<Verified/>}/>
+
         <Route path='profile' element={
+            <ProtectedRoutes>
             <Profile/>
+            </ProtectedRoutes>
           }/>
 
        <Route path='*' element={<Error/>}/>
