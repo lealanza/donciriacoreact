@@ -24,7 +24,7 @@ root.render(
           theme="dark"
           />
         <App />
-          </PersistGate>
+        </PersistGate>
       </Provider>
 
     </BrowserRouter>

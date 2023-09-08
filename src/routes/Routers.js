@@ -25,9 +25,9 @@ const Routers = () => {
         <Route 
           path='checkOut' 
           element={
-            <ProtectedRoutes>
+           // <ProtectedRoutes>
             <CheckOut/>
-            </ProtectedRoutes>
+            //</ProtectedRoutes>
           }
         />
         <Route path='login' element={<Login/>}/>
@@ -36,9 +36,9 @@ const Routers = () => {
         <Route path='verified' element={<Verified/>}/>
 
         <Route path='profile' element={
-            <ProtectedRoutes>
+            //<ProtectedRoutes>
             <Profile/>
-            </ProtectedRoutes>
+           // </ProtectedRoutes>
           }/>
 
        <Route path='*' element={<Error/>}/>

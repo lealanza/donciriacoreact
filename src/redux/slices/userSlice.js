@@ -29,7 +29,7 @@ const userSlice = createSlice({
     setIsAuthenticated: (state, action) => {
       return {
         ...state,
-        isAuthenticated: action.payload,
+        isAuthenticated: false,
       };
     },
   },
