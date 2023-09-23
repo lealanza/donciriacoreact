@@ -19,7 +19,7 @@ const Users = () => {
   return (
     <>
    
-    <div style={{margin:'auto', width:'1300px', display:'flex', alignItems:'center', justifyContent:'center'}}>
+    <div style={{margin:'auto', display:'flex', alignItems:'center', justifyContent:'center'}}>
         <table >
           <thead style={{margin:10}}>
             <tr style={{textAlign:'center', margin:10, fontSize:20, fontWeight:'bold', color:'blue'}}>
