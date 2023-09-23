@@ -23,7 +23,6 @@ const Login = () => {
         email,
         password,
       );
-      console.log(response.user)
       if (response) {
         dispatch(
           setCurrentUser({

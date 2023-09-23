@@ -1,106 +1,119 @@
-import { useState, useEffect } from "react";
-import React from "react";
-import { useSelector } from "react-redux"; 
-import { useNavigate } from "react-router-dom";
-import "../styles/profile.css";
-import { getOrderByUser } from "../axios/axios-order";
+import React, { useState, useEffect } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getOrderByUser } from '../axios/axios-order';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function Profile() {
   const { currentUser } = useSelector((state) => state.user);
-  const [order, setOrder] = useState([]);
-  const userId = useSelector((state) => state.user.currentUser && state.user.currentUser._id);
+  const [orders, setOrders] = useState([]);
+  const [expandedOrderId, setExpandedOrderId] = useState(null); // Para rastrear la orden expandida
+  const userId = useSelector((state) => state.user.currentUser?._id);
   const navigate = useNavigate();
 
   useEffect(() => {
-    let isMounted = true; // Agrega una bandera para verificar si el componente está montado
-
-    if (!currentUser) {
-      navigate("/login");
-    } else {
-      const fetchOrders = async () => {
-        try {
-          const response = await getOrderByUser(userId);
-          if (isMounted) {
-            setOrder(response.orders);
-          }
-        } catch (error) {
-          // Manejar errores aquí
-        }
-      };
-
-      fetchOrders();
-    }  return () => {
-      isMounted = false;
+    const fetchOrders = async () => {
+      try {
+        const response = await getOrderByUser(userId);
+          setOrders(response.orders);
+      } catch (error) {
+        // Manejar errores aquí
+      }
     };
+
+    fetchOrders();
   }, [userId, navigate, currentUser]);
 
+  const formattedOrders = orders.map((orderItem) => ({
+    ...orderItem,
+    id: orderItem._id,
+    updatedAt: new Date(orderItem.updatedAt),
+    status: orderItem.status === 'paid' ? 'Pagada' : orderItem.status === 'canceled' ? 'Cancelada' : 'Pendiente'
+  }));
+
+  const columns = [
+    { field: 'orderNumber', headerName: 'Numero de orden', flex: 1 },
+    {
+      field: 'updatedAt',
+      headerName: 'Fecha de la orden',
+      flex: 1,
+      valueGetter: (params) => {
+        const fechaOrden = params.row.updatedAt;
+        const dia = fechaOrden.getDate();
+        const mes = fechaOrden.getMonth() + 1;
+        const anio = fechaOrden.getFullYear();
+        return `${dia < 10 ? '0' : ''}${dia}/${mes < 10 ? '0' : ''}${mes}/${anio}`;
+      },
+    },
+    { field: 'total', headerName: 'Total de la orden', flex: 1 },
+    { field: 'status', headerName: 'Estado de la orden', flex: 1 },
+  ];
+
+  const handleOrderClick = (orderId) => {
+    setExpandedOrderId((prevId) => (prevId === orderId ? null : orderId));
+  };
+  const containerStyle = {
+    width: '100%',
+    maxWidth: '1300px',
+    margin: 'auto',
+    padding: '16px', 
+  };
+
+  const dataGridContainerStyle = {
+    width: '100%',
+    overflowX: 'auto', 
+  };
+
   return (
-    <>
-      <div style={{
-        width: '1300px',
-        margin: 'auto',
-      }}>
-        {currentUser && currentUser ? (
-          <>
-            <h1>Hola {currentUser.name}!</h1>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}>
-              {order && order.map((order) => {
-                const border = order.status === 'paid' ? '5px solid green' : order.status === 'pending' ? '5px solid red' : 'white';
-                const status = order.status==='paid' ? 'Pagada' : 'Pendiente' 
-                const fechaOrden = new Date(order.updatedAt);
-                const dia = fechaOrden.getDate();
-                const mes = fechaOrden.getMonth() + 1; 
-                const anio = fechaOrden.getFullYear();
-                const fechaFormateada = `${dia.length !== 1 ? '0' + dia : dia}/${mes}/${anio}`;
-                return (
-                  <div key={order._id} style={{ width: '700px', margin: '5px', border, padding: '10px', borderRadius: '20px' }}>
-                    <table style={{ width: '100%'}}>
-                      <tr>
-                        <td colspan="2" style={{
-                          fontSize: '20px',
-                          textAlign: 'center',
-                          fontWeight: 'bold',
-                          margin: '10px',
-                          padding: '10px',
-                        }}>Información de la orden</td>
-                      </tr>
-                      <tr>
-                        <td style={{
-                          fontWeight:600
-                        }}>Numero de orden:</td>
-                        <td>{order && order.orderNumber}</td>
-                      </tr>
-                      <tr>
-                        <td style={{
-                          fontWeight:600
-                        }}>Fecha de la orden:</td>
-                        <td>{fechaFormateada}</td>
-                      </tr>
-                      <tr>
-                        <td style={{
-                          fontWeight:600
-                        }}>Total de la orden:</td>
-                        <td>{order && order.total}</td>
-                      </tr>
-                      <tr>
-                        <td style={{
-                          fontWeight:600
-                        }}>Estado de la orden:</td>
-                        <td>{status}</td>
-                      </tr>
-                    </table>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        ) : null}
-      </div>
-    </>
+    <div style={containerStyle}>
+      {currentUser && (
+        <>
+          <h1>Hola {currentUser.name}!</h1>
+          <div style={dataGridContainerStyle}>
+            <DataGrid
+              rows={formattedOrders? formattedOrders : "No relaizo ninguna orden aun"}
+              columns={columns}
+              getRowId={(row) => row.id}
+              autoHeight
+              disableColumnMenu 
+              onRowClick={(params) => handleOrderClick(params.row.id)}
+            />
+          </div>
+          {expandedOrderId && (
+            <Accordion expanded={expandedOrderId !== null}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel-content"
+                id="panel-header"
+              >
+                <Typography>Detalles de la orden</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                {expandedOrderId && formattedOrders && formattedOrders.find((order) => order.id === expandedOrderId).products.map((e) => (
+                  <Typography>
+                    <h4>{e.product}</h4>
+                    <h4>{e.quantity} unidades</h4>
+                    <h4>Precio: ${e.price}</h4>
+                  </Typography>
+                ))}
+                
+                 
+                  
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          )}
+        </>
+      )}
+    </div>
   );
 }
 

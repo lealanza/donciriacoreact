@@ -93,7 +93,7 @@ const Tr = ({item}) =>{
         <td>
           <img src={item.imgUrl} alt="" />
         </td>
-        <td>{item.productName}</td>
+        <td>{item.title}</td>
         <td>${item.price}</td>
         <td>{item.quantity}</td>
         <td><motion.i onClick={deleteProductOne} className='ri-delete-bin-4-fill delete__btn'></motion.i></td>

@@ -1450,6 +1450,3 @@ import productImg51 from "../images/productImg51.jpg";
       }
     ]
 export default products
-
-
-

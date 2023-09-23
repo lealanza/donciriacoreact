@@ -85,6 +85,7 @@
 .profile__actions{
     position: absolute;
     top: 98%;
+    left: -50%;
     width: 150px;
     z-index: 10;
     padding: 15px;
